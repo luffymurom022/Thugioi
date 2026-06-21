@@ -25,6 +25,7 @@ import type {
   Creature,
   DashboardSummary,
   EvolutionPath,
+  GeneticsPreview,
   HealthStatus,
   HistoryEntry,
   ListCreaturesParams,
@@ -679,7 +680,7 @@ export const getSimulationTickUrl = () => {
 }
 
 /**
- * @summary Manually trigger a simulation tick (world engine step)
+ * @summary Manually trigger a simulation tick
  */
 export const simulationTick = async ( options?: RequestInit): Promise<TickResult> => {
 
@@ -727,7 +728,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type SimulationTickMutationError = ErrorType<unknown>
 
     /**
- * @summary Manually trigger a simulation tick (world engine step)
+ * @summary Manually trigger a simulation tick
  */
 export const useSimulationTick = <TError = ErrorType<unknown>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof simulationTick>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
@@ -816,4 +817,75 @@ export function useListEvolutionPaths<TData = Awaited<ReturnType<typeof listEvol
 
 
 
+
+export const getPreviewGeneticsUrl = () => {
+
+
+
+
+  return `/api/genetics/preview`
+}
+
+/**
+ * @summary Preview DNA fusion of two creatures without saving
+ */
+export const previewGenetics = async (breedingInput: BreedingInput, options?: RequestInit): Promise<GeneticsPreview> => {
+
+  return customFetch<GeneticsPreview>(getPreviewGeneticsUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      breedingInput,)
+  }
+);}
+
+
+
+
+export const getPreviewGeneticsMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof previewGenetics>>, TError,{data: BodyType<BreedingInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof previewGenetics>>, TError,{data: BodyType<BreedingInput>}, TContext> => {
+
+const mutationKey = ['previewGenetics'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof previewGenetics>>, {data: BodyType<BreedingInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  previewGenetics(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PreviewGeneticsMutationResult = NonNullable<Awaited<ReturnType<typeof previewGenetics>>>
+    export type PreviewGeneticsMutationBody = BodyType<BreedingInput>
+    export type PreviewGeneticsMutationError = ErrorType<void>
+
+    /**
+ * @summary Preview DNA fusion of two creatures without saving
+ */
+export const usePreviewGenetics = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof previewGenetics>>, TError,{data: BodyType<BreedingInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof previewGenetics>>,
+        TError,
+        {data: BodyType<BreedingInput>},
+        TContext
+      > => {
+      return useMutation(getPreviewGeneticsMutationOptions(options));
+    }
 

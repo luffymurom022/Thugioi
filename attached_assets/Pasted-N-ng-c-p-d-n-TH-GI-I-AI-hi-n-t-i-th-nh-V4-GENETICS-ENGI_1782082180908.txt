@@ -1,0 +1,200 @@
+Nâng cấp dự án THÚ GIỚI AI hiện tại thành V4 - GENETICS ENGINE.
+
+Không thay đổi giao diện hiện có.
+
+Mục tiêu:
+
+Sinh vật có DNA.
+
+Sinh vật có thể di truyền đặc tính.
+
+Sinh vật có thể lai tạo tạo ra loài hoàn toàn mới.
+
+========================
+DNA SYSTEM
+
+Mỗi loài có DNA:
+
+{
+element,
+strength,
+agility,
+intelligence,
+vitality,
+size,
+lifespan,
+mutationRate,
+bloodline
+}
+
+DNA phải được lưu trong database.
+
+========================
+DI TRUYỀN
+
+Khi sinh sản:
+
+Con nhận DNA từ bố mẹ.
+
+Ví dụ:
+
+strength =
+trung bình bố mẹ + đột biến ngẫu nhiên
+
+agility =
+trung bình bố mẹ + đột biến ngẫu nhiên
+
+intelligence =
+trung bình bố mẹ + đột biến ngẫu nhiên
+
+========================
+LAI TẠO
+
+Ví dụ:
+
+Hỏa Lang
++
+Lôi Ưng
+
+=
+
+Lôi Diễm Lang Ưng
+
+Tạo tự động:
+
+* tên
+* hệ
+* DNA
+* mô tả
+
+Không hard-code.
+
+========================
+TẠO TÊN TỰ ĐỘNG
+
+Ví dụ:
+
+Hỏa + Lôi
+
+=
+Lôi Diễm
+
+Lang + Ưng
+
+=
+Lang Ưng
+
+Kết quả:
+
+Lôi Diễm Lang Ưng
+
+Tạo thuật toán ghép tên.
+
+========================
+HỆ NGUYÊN TỐ LAI
+
+Ví dụ:
+
+Hỏa + Lôi
+
+Lôi Diễm
+
+Băng + Lôi
+
+Hàn Lôi
+
+Quang + Ám
+
+Hỗn Mang
+
+Xây dựng bảng kết hợp nguyên tố.
+
+========================
+ĐỘT BIẾN GEN
+
+Mỗi lần sinh sản:
+
+1% - 5% xác suất đột biến.
+
+Đột biến có thể:
+
+* tăng chỉ số
+* đổi hệ
+* đổi màu
+* tạo huyết mạch mới
+
+========================
+HUYẾT MẠCH
+
+Common
+Rare
+Epic
+Legendary
+Mythic
+Ancient
+Primordial
+
+DNA ảnh hưởng độ hiếm huyết mạch.
+
+========================
+LOÀI MỚI
+
+Nếu tổ hợp DNA chưa tồn tại:
+
+Tạo loài mới.
+
+Tự thêm vào Beastdex.
+
+========================
+GENETICS LAB
+
+Tạo trang mới:
+
+Genetics Lab
+
+Hiển thị:
+
+* DNA bố
+* DNA mẹ
+* DNA con
+* Tỷ lệ đột biến
+* Huyết mạch
+
+========================
+BEASTDEX
+
+Thêm:
+
+* DNA
+* Huyết mạch
+* Tổ tiên
+* Loài cha
+* Loài mẹ
+
+========================
+LỊCH SỬ THẾ GIỚI
+
+Ghi log:
+
+[Năm 218]
+
+Loài mới xuất hiện:
+
+Lôi Diễm Lang Ưng
+
+Cha:
+Hỏa Lang
+
+Mẹ:
+Lôi Ưng
+
+========================
+YÊU CẦU
+
+Tạo Genetics Engine có khả năng sinh ra hàng nghìn loài mới.
+
+Không hard-code từng loài.
+
+Mọi thứ phải dựa trên DNA và quy tắc di truyền.
+
+Giữ giao diện hologram sci-fi hiện tại.

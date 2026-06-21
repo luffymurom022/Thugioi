@@ -41,6 +41,12 @@ export interface Creature {
   maxPopulation?: number;
   mutationChance?: number;
   isMutant?: boolean;
+  strength?: number;
+  agility?: number;
+  intelligence?: number;
+  vitality?: number;
+  sizeClass?: string;
+  bloodline?: string;
 }
 
 export interface Zone {
@@ -72,6 +78,8 @@ export interface BreedingInput {
 export interface BreedingResult {
   newCreature: Creature;
   message: string;
+  isMutant?: boolean;
+  bloodline?: string;
 }
 
 export interface HistoryEntry {
@@ -137,6 +145,30 @@ export interface EvolutionPath {
   minHuntSuccesses: number;
   minAgeTicks: number;
   createdAt?: string;
+}
+
+export interface DNAProfile {
+  strength: number;
+  agility: number;
+  intelligence: number;
+  vitality: number;
+  sizeClass: string;
+  bloodline: string;
+  mutationChance: number;
+}
+
+export interface GeneticsPreview {
+  childDna: DNAProfile;
+  element: string;
+  name: string;
+  rank: string;
+  rankLevel: number;
+  bloodline: string;
+  isMutant: boolean;
+  mutationSummary: string;
+  description: string;
+  parentADna?: DNAProfile;
+  parentBDna?: DNAProfile;
 }
 
 export type ListCreaturesParams = {

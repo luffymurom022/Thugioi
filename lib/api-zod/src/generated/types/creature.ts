@@ -38,4 +38,10 @@ export interface Creature {
   maxPopulation?: number;
   mutationChance?: number;
   isMutant?: boolean;
+  strength?: number;
+  agility?: number;
+  intelligence?: number;
+  vitality?: number;
+  sizeClass?: string;
+  bloodline?: string;
 }

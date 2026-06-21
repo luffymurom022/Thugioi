@@ -8,19 +8,13 @@ servers:
     description: Base API path
 tags:
   - name: health
-    description: Health operations
   - name: creatures
-    description: Creature management
   - name: zones
-    description: Zone management
   - name: breeding
-    description: Breeding operations
   - name: history
-    description: World history log
   - name: dashboard
-    description: Dashboard summary
   - name: evolution
-    description: Evolution system
+  - name: genetics
 paths:
   /healthz:
     get:
@@ -184,7 +178,7 @@ paths:
     post:
       operationId: simulationTick
       tags: [dashboard]
-      summary: Manually trigger a simulation tick (world engine step)
+      summary: Manually trigger a simulation tick
       responses:
         "200":
           description: Tick result
@@ -208,6 +202,27 @@ paths:
                 items:
                   $ref: "#/components/schemas/EvolutionPath"
 
+  /genetics/preview:
+    post:
+      operationId: previewGenetics
+      tags: [genetics]
+      summary: Preview DNA fusion of two creatures without saving
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BreedingInput"
+      responses:
+        "200":
+          description: Predicted child DNA and traits
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneticsPreview"
+        "400":
+          description: Invalid input
+
 components:
   schemas:
     HealthStatus:
@@ -215,8 +230,7 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
     Creature:
       type: object
@@ -280,6 +294,18 @@ components:
           type: number
         isMutant:
           type: boolean
+        strength:
+          type: integer
+        agility:
+          type: integer
+        intelligence:
+          type: integer
+        vitality:
+          type: integer
+        sizeClass:
+          type: string
+        bloodline:
+          type: string
 
     Zone:
       type: object
@@ -339,6 +365,10 @@ components:
         newCreature:
           $ref: "#/components/schemas/Creature"
         message:
+          type: string
+        isMutant:
+          type: boolean
+        bloodline:
           type: string
 
     HistoryEntry:
@@ -460,3 +490,49 @@ components:
           type: integer
         createdAt:
           type: string
+
+    DNAProfile:
+      type: object
+      required: [strength, agility, intelligence, vitality, sizeClass, bloodline, mutationChance]
+      properties:
+        strength:
+          type: integer
+        agility:
+          type: integer
+        intelligence:
+          type: integer
+        vitality:
+          type: integer
+        sizeClass:
+          type: string
+        bloodline:
+          type: string
+        mutationChance:
+          type: number
+
+    GeneticsPreview:
+      type: object
+      required: [childDna, element, name, rank, rankLevel, bloodline, isMutant, mutationSummary, description]
+      properties:
+        childDna:
+          $ref: "#/components/schemas/DNAProfile"
+        element:
+          type: string
+        name:
+          type: string
+        rank:
+          type: string
+        rankLevel:
+          type: integer
+        bloodline:
+          type: string
+        isMutant:
+          type: boolean
+        mutationSummary:
+          type: string
+        description:
+          type: string
+        parentADna:
+          $ref: "#/components/schemas/DNAProfile"
+        parentBDna:
+          $ref: "#/components/schemas/DNAProfile"

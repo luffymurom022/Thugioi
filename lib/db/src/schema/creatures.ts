@@ -35,6 +35,14 @@ export const creaturesTable = pgTable("creatures", {
   dietType: text("diet_type").notNull().default("herbivore"),
   mutationChance: real("mutation_chance").notNull().default(0.01),
   isMutant: boolean("is_mutant").notNull().default(false),
+
+  // Genetics / DNA system
+  strength: integer("strength").notNull().default(50),
+  agility: integer("agility").notNull().default(50),
+  intelligence: integer("intelligence").notNull().default(50),
+  vitality: integer("vitality").notNull().default(50),
+  sizeClass: text("size_class").notNull().default("medium"),
+  bloodline: text("bloodline").notNull().default("common"),
 });
 
 export const insertCreatureSchema = createInsertSchema(creaturesTable).omit({ id: true, createdAt: true });

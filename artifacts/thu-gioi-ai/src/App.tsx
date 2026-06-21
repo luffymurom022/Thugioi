@@ -10,6 +10,7 @@ import CreatureDetail from "@/pages/creature-detail";
 import BreedingPage from "@/pages/breeding";
 import HistoryPage from "@/pages/history";
 import EvolutionTreePage from "@/pages/evolution-tree";
+import GeneticsLabPage from "@/pages/genetics-lab";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ function Router() {
         <Route path="/breeding" component={BreedingPage} />
         <Route path="/history" component={HistoryPage} />
         <Route path="/evolution" component={EvolutionTreePage} />
+        <Route path="/genetics" component={GeneticsLabPage} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

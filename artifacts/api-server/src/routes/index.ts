@@ -6,6 +6,7 @@ import historyRouter from "./history";
 import dashboardRouter from "./dashboard";
 import breedingRouter from "./breeding";
 import evolutionRouter from "./evolution";
+import geneticsRouter from "./genetics";
 
 const router: IRouter = Router();
 
@@ -16,5 +17,6 @@ router.use(historyRouter);
 router.use(dashboardRouter);
 router.use(breedingRouter);
 router.use(evolutionRouter);
+router.use(geneticsRouter);
 
 export default router;

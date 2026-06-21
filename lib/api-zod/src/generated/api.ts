@@ -86,7 +86,13 @@ export const ListCreaturesResponseItem = zod.object({
   "dietType": zod.string().optional(),
   "maxPopulation": zod.number().optional(),
   "mutationChance": zod.number().optional(),
-  "isMutant": zod.boolean().optional()
+  "isMutant": zod.boolean().optional(),
+  "strength": zod.number().optional(),
+  "agility": zod.number().optional(),
+  "intelligence": zod.number().optional(),
+  "vitality": zod.number().optional(),
+  "sizeClass": zod.string().optional(),
+  "bloodline": zod.string().optional()
 })
 export const ListCreaturesResponse = zod.array(ListCreaturesResponseItem)
 
@@ -127,7 +133,13 @@ export const GetCreatureResponse = zod.object({
   "dietType": zod.string().optional(),
   "maxPopulation": zod.number().optional(),
   "mutationChance": zod.number().optional(),
-  "isMutant": zod.boolean().optional()
+  "isMutant": zod.boolean().optional(),
+  "strength": zod.number().optional(),
+  "agility": zod.number().optional(),
+  "intelligence": zod.number().optional(),
+  "vitality": zod.number().optional(),
+  "sizeClass": zod.string().optional(),
+  "bloodline": zod.string().optional()
 })
 
 
@@ -190,7 +202,13 @@ export const GetZoneResponse = zod.object({
   "dietType": zod.string().optional(),
   "maxPopulation": zod.number().optional(),
   "mutationChance": zod.number().optional(),
-  "isMutant": zod.boolean().optional()
+  "isMutant": zod.boolean().optional(),
+  "strength": zod.number().optional(),
+  "agility": zod.number().optional(),
+  "intelligence": zod.number().optional(),
+  "vitality": zod.number().optional(),
+  "sizeClass": zod.string().optional(),
+  "bloodline": zod.string().optional()
 }))
 })
 
@@ -226,7 +244,7 @@ export const ListHistoryResponse = zod.array(ListHistoryResponseItem)
 
 
 /**
- * @summary Manually trigger a simulation tick (world engine step)
+ * @summary Manually trigger a simulation tick
  */
 export const SimulationTickResponse = zod.object({
   "worldDay": zod.number(),
@@ -257,5 +275,52 @@ export const ListEvolutionPathsResponseItem = zod.object({
   "createdAt": zod.string().optional()
 })
 export const ListEvolutionPathsResponse = zod.array(ListEvolutionPathsResponseItem)
+
+
+/**
+ * @summary Preview DNA fusion of two creatures without saving
+ */
+export const PreviewGeneticsBody = zod.object({
+  "creatureAId": zod.number(),
+  "creatureBId": zod.number()
+})
+
+export const PreviewGeneticsResponse = zod.object({
+  "childDna": zod.object({
+  "strength": zod.number(),
+  "agility": zod.number(),
+  "intelligence": zod.number(),
+  "vitality": zod.number(),
+  "sizeClass": zod.string(),
+  "bloodline": zod.string(),
+  "mutationChance": zod.number()
+}),
+  "element": zod.string(),
+  "name": zod.string(),
+  "rank": zod.string(),
+  "rankLevel": zod.number(),
+  "bloodline": zod.string(),
+  "isMutant": zod.boolean(),
+  "mutationSummary": zod.string(),
+  "description": zod.string(),
+  "parentADna": zod.object({
+  "strength": zod.number(),
+  "agility": zod.number(),
+  "intelligence": zod.number(),
+  "vitality": zod.number(),
+  "sizeClass": zod.string(),
+  "bloodline": zod.string(),
+  "mutationChance": zod.number()
+}).optional(),
+  "parentBDna": zod.object({
+  "strength": zod.number(),
+  "agility": zod.number(),
+  "intelligence": zod.number(),
+  "vitality": zod.number(),
+  "sizeClass": zod.string(),
+  "bloodline": zod.string(),
+  "mutationChance": zod.number()
+}).optional()
+})
 
 

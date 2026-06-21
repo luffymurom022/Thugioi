@@ -10,4 +10,6 @@ import type { Creature } from './creature';
 export interface BreedingResult {
   newCreature: Creature;
   message: string;
+  isMutant?: boolean;
+  bloodline?: string;
 }
