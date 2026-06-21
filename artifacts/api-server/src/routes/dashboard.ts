@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { eq, sum, count, desc } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { db, creaturesTable, zonesTable, historyTable, worldStateTable } from "@workspace/db";
 import { GetDashboardResponse, SimulationTickResponse } from "@workspace/api-zod";
 import { runSimulationTick } from "../lib/simulation";
@@ -17,24 +17,24 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
   const livingSpecies = allCreatures.filter(c => c.status === "alive").length;
 
   const zones = await db.select().from(zonesTable).orderBy(zonesTable.id);
-  const zoneStats = await Promise.all(zones.map(async (zone) => {
+  const zoneStats = zones.map((zone) => {
     const zoneCreatures = allCreatures.filter(c => c.habitat === zone.name && c.status === "alive");
     const population = zoneCreatures.reduce((acc, c) => acc + c.population, 0);
     const speciesCount = zoneCreatures.length;
-    return {
-      zoneId: zone.id,
-      zoneName: zone.name,
-      population,
-      speciesCount,
-      capacity: zone.capacity,
-    };
-  }));
+    return { zoneId: zone.id, zoneName: zone.name, population, speciesCount, capacity: zone.capacity };
+  });
 
   const recentEvents = await db
     .select()
     .from(historyTable)
     .orderBy(desc(historyTable.createdAt))
     .limit(10);
+
+  // Enhanced stats
+  const aliveCreatures = allCreatures.filter(c => c.status === "alive");
+  const strongestSpecies = aliveCreatures.sort((a, b) => b.rankLevel - a.rankLevel)[0] ?? null;
+  const mostPopulousSpecies = aliveCreatures.sort((a, b) => b.population - a.population)[0] ?? null;
+  const newestSpecies = allCreatures.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0] ?? null;
 
   res.json(GetDashboardResponse.parse({
     totalSpecies,
@@ -44,6 +44,10 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
     worldDay,
     zoneStats,
     recentEvents: recentEvents.map(e => ({ ...e, createdAt: e.createdAt.toISOString() })),
+    strongestSpeciesName: strongestSpecies?.name ?? null,
+    mostPopulousSpeciesName: mostPopulousSpecies?.name ?? null,
+    mostPopulousCount: mostPopulousSpecies?.population ?? null,
+    newestSpeciesName: newestSpecies?.name ?? null,
   }));
 });
 

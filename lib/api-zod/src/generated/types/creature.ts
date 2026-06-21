@@ -24,4 +24,15 @@ export interface Creature {
   /** @nullable */
   parentB?: string | null;
   createdAt: string;
+  energy?: number;
+  hunger?: number;
+  ageTicks?: number;
+  gender?: string;
+  preySpecies?: string;
+  predatorSpecies?: string;
+  generation?: number;
+  huntSuccesses?: number;
+  evolutionStage?: number;
+  dietType?: string;
+  maxPopulation?: number;
 }

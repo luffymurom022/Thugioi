@@ -27,6 +27,17 @@ export interface Creature {
   /** @nullable */
   parentB?: string | null;
   createdAt: string;
+  energy?: number;
+  hunger?: number;
+  ageTicks?: number;
+  gender?: string;
+  preySpecies?: string;
+  predatorSpecies?: string;
+  generation?: number;
+  huntSuccesses?: number;
+  evolutionStage?: number;
+  dietType?: string;
+  maxPopulation?: number;
 }
 
 export interface Zone {
@@ -84,6 +95,14 @@ export interface DashboardSummary {
   worldDay: number;
   zoneStats: ZoneStat[];
   recentEvents: HistoryEntry[];
+  /** @nullable */
+  strongestSpeciesName?: string | null;
+  /** @nullable */
+  mostPopulousSpeciesName?: string | null;
+  /** @nullable */
+  mostPopulousCount?: number | null;
+  /** @nullable */
+  newestSpeciesName?: string | null;
 }
 
 export interface CreaturePopulation {

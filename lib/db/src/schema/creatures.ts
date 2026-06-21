@@ -18,6 +18,21 @@ export const creaturesTable = pgTable("creatures", {
   parentA: text("parent_a"),
   parentB: text("parent_b"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+
+  // Ecosystem v2 fields
+  energy: integer("energy").notNull().default(100),
+  hunger: integer("hunger").notNull().default(30),
+  ageTicks: integer("age_ticks").notNull().default(0),
+  maturityAge: integer("maturity_age").notNull().default(5),
+  gender: text("gender").notNull().default("mixed"),
+  preySpecies: text("prey_species").notNull().default("[]"),
+  predatorSpecies: text("predator_species").notNull().default("[]"),
+  generation: integer("generation").notNull().default(1),
+  huntSuccesses: integer("hunt_successes").notNull().default(0),
+  evolutionStage: integer("evolution_stage").notNull().default(0),
+  evolutionChain: text("evolution_chain").notNull().default("[]"),
+  maxPopulation: integer("max_population").notNull().default(2000),
+  dietType: text("diet_type").notNull().default("herbivore"),
 });
 
 export const insertCreatureSchema = createInsertSchema(creaturesTable).omit({ id: true, createdAt: true });

@@ -54,7 +54,6 @@ export const getHealthCheckUrl = () => {
 }
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const healthCheck = async ( options?: RequestInit): Promise<HealthStatus> => {
@@ -132,7 +131,6 @@ export const getGetDashboardUrl = () => {
 }
 
 /**
- * Returns total population, species count, extinction count, and per-zone stats
  * @summary Get world dashboard summary
  */
 export const getDashboard = async ( options?: RequestInit): Promise<DashboardSummary> => {

@@ -16,4 +16,12 @@ export interface DashboardSummary {
   worldDay: number;
   zoneStats: ZoneStat[];
   recentEvents: HistoryEntry[];
+  /** @nullable */
+  strongestSpeciesName?: string | null;
+  /** @nullable */
+  mostPopulousSpeciesName?: string | null;
+  /** @nullable */
+  mostPopulousCount?: number | null;
+  /** @nullable */
+  newestSpeciesName?: string | null;
 }

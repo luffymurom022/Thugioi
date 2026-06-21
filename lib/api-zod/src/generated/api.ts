@@ -9,7 +9,6 @@ import * as zod from 'zod';
 
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
@@ -18,7 +17,6 @@ export const HealthCheckResponse = zod.object({
 
 
 /**
- * Returns total population, species count, extinction count, and per-zone stats
  * @summary Get world dashboard summary
  */
 export const GetDashboardResponse = zod.object({
@@ -40,7 +38,11 @@ export const GetDashboardResponse = zod.object({
   "eventType": zod.string(),
   "description": zod.string(),
   "createdAt": zod.string()
-}))
+})),
+  "strongestSpeciesName": zod.string().nullish(),
+  "mostPopulousSpeciesName": zod.string().nullish(),
+  "mostPopulousCount": zod.number().nullish(),
+  "newestSpeciesName": zod.string().nullish()
 })
 
 
@@ -68,7 +70,18 @@ export const ListCreaturesResponseItem = zod.object({
   "isHybrid": zod.boolean(),
   "parentA": zod.string().nullish(),
   "parentB": zod.string().nullish(),
-  "createdAt": zod.string()
+  "createdAt": zod.string(),
+  "energy": zod.number().optional(),
+  "hunger": zod.number().optional(),
+  "ageTicks": zod.number().optional(),
+  "gender": zod.string().optional(),
+  "preySpecies": zod.string().optional(),
+  "predatorSpecies": zod.string().optional(),
+  "generation": zod.number().optional(),
+  "huntSuccesses": zod.number().optional(),
+  "evolutionStage": zod.number().optional(),
+  "dietType": zod.string().optional(),
+  "maxPopulation": zod.number().optional()
 })
 export const ListCreaturesResponse = zod.array(ListCreaturesResponseItem)
 
@@ -95,7 +108,18 @@ export const GetCreatureResponse = zod.object({
   "isHybrid": zod.boolean(),
   "parentA": zod.string().nullish(),
   "parentB": zod.string().nullish(),
-  "createdAt": zod.string()
+  "createdAt": zod.string(),
+  "energy": zod.number().optional(),
+  "hunger": zod.number().optional(),
+  "ageTicks": zod.number().optional(),
+  "gender": zod.string().optional(),
+  "preySpecies": zod.string().optional(),
+  "predatorSpecies": zod.string().optional(),
+  "generation": zod.number().optional(),
+  "huntSuccesses": zod.number().optional(),
+  "evolutionStage": zod.number().optional(),
+  "dietType": zod.string().optional(),
+  "maxPopulation": zod.number().optional()
 })
 
 
@@ -144,7 +168,18 @@ export const GetZoneResponse = zod.object({
   "isHybrid": zod.boolean(),
   "parentA": zod.string().nullish(),
   "parentB": zod.string().nullish(),
-  "createdAt": zod.string()
+  "createdAt": zod.string(),
+  "energy": zod.number().optional(),
+  "hunger": zod.number().optional(),
+  "ageTicks": zod.number().optional(),
+  "gender": zod.string().optional(),
+  "preySpecies": zod.string().optional(),
+  "predatorSpecies": zod.string().optional(),
+  "generation": zod.number().optional(),
+  "huntSuccesses": zod.number().optional(),
+  "evolutionStage": zod.number().optional(),
+  "dietType": zod.string().optional(),
+  "maxPopulation": zod.number().optional()
 }))
 })
 

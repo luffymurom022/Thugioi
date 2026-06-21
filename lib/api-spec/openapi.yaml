@@ -25,7 +25,6 @@ paths:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -39,7 +38,6 @@ paths:
       operationId: getDashboard
       tags: [dashboard]
       summary: Get world dashboard summary
-      description: Returns total population, species count, extinction count, and per-zone stats
       responses:
         "200":
           description: Dashboard summary
@@ -237,6 +235,28 @@ components:
           type: ["string", "null"]
         createdAt:
           type: string
+        energy:
+          type: integer
+        hunger:
+          type: integer
+        ageTicks:
+          type: integer
+        gender:
+          type: string
+        preySpecies:
+          type: string
+        predatorSpecies:
+          type: string
+        generation:
+          type: integer
+        huntSuccesses:
+          type: integer
+        evolutionStage:
+          type: integer
+        dietType:
+          type: string
+        maxPopulation:
+          type: integer
 
     Zone:
       type: object
@@ -335,6 +355,14 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/HistoryEntry"
+        strongestSpeciesName:
+          type: ["string", "null"]
+        mostPopulousSpeciesName:
+          type: ["string", "null"]
+        mostPopulousCount:
+          type: ["integer", "null"]
+        newestSpeciesName:
+          type: ["string", "null"]
 
     ZoneStat:
       type: object

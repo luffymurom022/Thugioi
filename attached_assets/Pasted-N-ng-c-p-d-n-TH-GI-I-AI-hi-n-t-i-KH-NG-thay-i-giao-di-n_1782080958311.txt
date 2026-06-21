@@ -1,0 +1,176 @@
+Nâng cấp dự án THÚ GIỚI AI hiện tại.
+
+KHÔNG thay đổi giao diện đã có.
+
+Mở rộng hệ sinh thái để sinh vật tự sinh sống.
+
+=================================
+HỆ SINH THÁI
+=================================
+
+Mỗi loài có thêm:
+
+energy
+hunger
+age
+gender
+territory
+predators
+prey
+
+=================================
+CHUỖI THỨC ĂN
+=================================
+
+Ví dụ:
+
+Hỏa Lang ăn:
+- Thỏ Lửa
+- Linh Dương Hỏa
+
+Kim Giáp Hổ ăn:
+- Hỏa Lang
+- Huyền Xà
+
+Mỗi lần World Engine chạy:
+
+- Tìm thức ăn
+- Đi săn
+- Ăn
+- Tăng năng lượng
+
+Nếu không có thức ăn:
+
+- Giảm năng lượng
+- Có thể chết
+
+=================================
+SINH SẢN
+=================================
+
+Điều kiện:
+
+- Đủ tuổi trưởng thành
+- Có đủ năng lượng
+- Có cá thể đực và cái
+
+Sinh ra thế hệ mới.
+
+Dân số tăng tự nhiên.
+
+=================================
+TUỔI THỌ
+=================================
+
+Mỗi loài có tuổi thọ riêng.
+
+Ví dụ:
+
+Hỏa Lang: 20 năm
+Lôi Ưng: 30 năm
+Huyền Xà: 80 năm
+
+Quá tuổi sẽ chết tự nhiên.
+
+=================================
+LÃNH THỔ
+=================================
+
+Mỗi vùng có sức chứa:
+
+Ví dụ:
+
+Hỏa Sơn Vực:
+
+maxPopulation: 5000
+
+Nếu vượt quá:
+
+- Di cư
+- Cạnh tranh
+- Giảm tỷ lệ sinh
+
+=================================
+TIẾN HÓA
+=================================
+
+Mỗi loài có cây tiến hóa.
+
+Ví dụ:
+
+Hỏa Lang
+
+→ Huyết Lang
+
+→ Viêm Lang
+
+→ Thiên Hỏa Lang
+
+Điều kiện:
+
+- Tuổi
+- Số thế hệ
+- Số lần săn thành công
+
+Tiến hóa tạo loài mới.
+
+=================================
+SỰ KIỆN THẾ GIỚI
+=================================
+
+Tạo hệ thống sự kiện ngẫu nhiên.
+
+Ví dụ:
+
+- Hạn hán
+- Núi lửa phun
+- Bão tuyết
+- Dịch bệnh
+- Thiên thạch
+
+Sự kiện ảnh hưởng đến:
+
+- Dân số
+- Tài nguyên
+- Khả năng sinh sản
+
+=================================
+LỊCH SỬ THẾ GIỚI
+=================================
+
+Ghi lại toàn bộ:
+
+- Sinh sản
+- Tiến hóa
+- Tuyệt chủng
+- Thiên tai
+- Lai tạo
+
+Dạng timeline.
+
+=================================
+THỐNG KÊ
+=================================
+
+Dashboard mới:
+
+- Tổng số loài
+- Tổng số cá thể
+- Loài mạnh nhất
+- Loài đông nhất
+- Loài tuyệt chủng
+- Loài mới sinh ra
+
+=================================
+YÊU CẦU
+=================================
+
+Không làm game.
+
+Không làm chiến đấu thời gian thực.
+
+Đây là hệ mô phỏng thế giới sống.
+
+Mọi sinh vật tự hành động bằng World Engine.
+
+Ưu tiên hiệu năng để có thể mô phỏng hàng nghìn cá thể.
