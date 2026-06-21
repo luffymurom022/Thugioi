@@ -1,4 +1,5 @@
 import { db, creaturesTable, historyTable, worldStateTable, worldEventsTable, evolutionPathsTable } from "@workspace/db";
+import { runKingdomTick } from "./kingdom-engine";
 import { eq, sql } from "drizzle-orm";
 
 const RANKS = [
@@ -463,7 +464,14 @@ export async function runSimulationTick() {
     if (eventMsg) events.push(eventMsg);
   }
 
-  // Step 5: Advance world day
+  // Step 5: Kingdom & Territory tick (V5)
+  try {
+    await runKingdomTick(nextDay);
+  } catch (err) {
+    console.error("[KingdomTick] Error:", err);
+  }
+
+  // Step 6: Advance world day
   await db.update(worldStateTable)
     .set({ worldDay: nextDay })
     .where(eq(worldStateTable.id, worldState.id));

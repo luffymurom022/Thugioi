@@ -6,6 +6,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './beastKingdom';
+export * from './beastKingdomDetail';
 export * from './breedingInput';
 export * from './breedingResult';
 export * from './creature';
@@ -16,8 +18,11 @@ export * from './evolutionPath';
 export * from './geneticsPreview';
 export * from './healthStatus';
 export * from './historyEntry';
+export * from './kingdomRelation';
 export * from './listCreaturesParams';
 export * from './listHistoryParams';
+export * from './pack';
+export * from './territory';
 export * from './tickResult';
 export * from './zone';
 export * from './zoneDetail';

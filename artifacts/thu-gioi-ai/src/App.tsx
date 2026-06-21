@@ -11,6 +11,7 @@ import BreedingPage from "@/pages/breeding";
 import HistoryPage from "@/pages/history";
 import EvolutionTreePage from "@/pages/evolution-tree";
 import GeneticsLabPage from "@/pages/genetics-lab";
+import KingdomsPage from "@/pages/kingdoms";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ function Router() {
         <Route path="/history" component={HistoryPage} />
         <Route path="/evolution" component={EvolutionTreePage} />
         <Route path="/genetics" component={GeneticsLabPage} />
+        <Route path="/kingdoms" component={KingdomsPage} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

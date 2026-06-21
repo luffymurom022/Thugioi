@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
 import { eq, desc } from "drizzle-orm";
-import { db, creaturesTable, zonesTable, historyTable, worldStateTable, evolutionPathsTable } from "@workspace/db";
+import { db, creaturesTable, zonesTable, historyTable, worldStateTable, evolutionPathsTable, beastKingdomsTable } from "@workspace/db";
 import { GetDashboardResponse, SimulationTickResponse } from "@workspace/api-zod";
 import { runSimulationTick } from "../lib/simulation";
 
@@ -31,13 +31,13 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
     .orderBy(desc(historyTable.createdAt))
     .limit(10);
 
-  // Enhanced stats
+  // Enhanced creature stats
   const aliveCreatures = allCreatures.filter(c => c.status === "alive");
   const strongestSpecies = [...aliveCreatures].sort((a, b) => b.rankLevel - a.rankLevel)[0] ?? null;
   const mostPopulousSpecies = [...aliveCreatures].sort((a, b) => b.population - a.population)[0] ?? null;
   const newestSpecies = [...allCreatures].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0] ?? null;
 
-  // Count species that are close to evolving (have evolution paths and meet ≥ 2 conditions)
+  // Evolution progress
   const allPaths = await db.select().from(evolutionPathsTable);
   const evolvingSpeciesCount = aliveCreatures.filter(c => {
     const path = allPaths.find(p => p.fromSpecies === c.name);
@@ -48,6 +48,13 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
     if (c.ageTicks >= path.minAgeTicks * 0.6) conditionsMet++;
     return conditionsMet >= 2;
   }).length;
+
+  // Kingdom stats (V5)
+  const kingdoms = await db.select().from(beastKingdomsTable).where(eq(beastKingdomsTable.status, "active"));
+  const totalKingdoms = kingdoms.length;
+  const strongestKingdom = [...kingdoms].sort((a, b) => b.militaryPower - a.militaryPower)[0] ?? null;
+  const richestKingdom  = [...kingdoms].sort((a, b) => b.economy - a.economy)[0] ?? null;
+  const largestKingdom  = [...kingdoms].sort((a, b) => b.population - a.population)[0] ?? null;
 
   res.json(GetDashboardResponse.parse({
     totalSpecies,
@@ -63,6 +70,10 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
     newestSpeciesName: newestSpecies?.name ?? null,
     evolvingSpeciesCount,
     mutatedSpeciesCount,
+    totalKingdoms,
+    strongestKingdomName: strongestKingdom?.name ?? null,
+    richestKingdomName: richestKingdom?.name ?? null,
+    largestKingdomName: largestKingdom?.name ?? null,
   }));
 });
 

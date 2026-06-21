@@ -15,6 +15,8 @@ tags:
   - name: dashboard
   - name: evolution
   - name: genetics
+  - name: kingdoms
+  - name: territories
 paths:
   /healthz:
     get:
@@ -201,6 +203,87 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/EvolutionPath"
+
+  /territories:
+    get:
+      operationId: listTerritories
+      tags: [territories]
+      summary: List all territories with resources
+      responses:
+        "200":
+          description: Territory list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Territory"
+
+  /kingdoms:
+    get:
+      operationId: listKingdoms
+      tags: [kingdoms]
+      summary: List all beast kingdoms ranked by influence
+      responses:
+        "200":
+          description: Kingdom list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BeastKingdom"
+
+  /kingdoms/{id}:
+    get:
+      operationId: getKingdom
+      tags: [kingdoms]
+      summary: Get kingdom detail with packs, territories, and relations
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Kingdom detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeastKingdomDetail"
+        "404":
+          description: Not found
+
+  /packs:
+    get:
+      operationId: listPacks
+      tags: [kingdoms]
+      summary: List all active packs
+      responses:
+        "200":
+          description: Pack list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pack"
+
+  /kingdom-relations:
+    get:
+      operationId: listKingdomRelations
+      tags: [kingdoms]
+      summary: List all diplomacy relations between kingdoms
+      responses:
+        "200":
+          description: Relation list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/KingdomRelation"
 
   /genetics/preview:
     post:
@@ -420,6 +503,14 @@ components:
           type: ["integer", "null"]
         mutatedSpeciesCount:
           type: ["integer", "null"]
+        totalKingdoms:
+          type: ["integer", "null"]
+        strongestKingdomName:
+          type: ["string", "null"]
+        richestKingdomName:
+          type: ["string", "null"]
+        largestKingdomName:
+          type: ["string", "null"]
 
     ZoneStat:
       type: object
@@ -487,6 +578,132 @@ components:
         minHuntSuccesses:
           type: integer
         minAgeTicks:
+          type: integer
+        createdAt:
+          type: string
+
+    Territory:
+      type: object
+      required: [id, zoneName, food, water, mineral, spirit, foodMax, waterMax, mineralMax, spiritMax, climate, contested, createdAt]
+      properties:
+        id:
+          type: integer
+        zoneName:
+          type: string
+        food:
+          type: integer
+        water:
+          type: integer
+        mineral:
+          type: integer
+        spirit:
+          type: integer
+        foodMax:
+          type: integer
+        waterMax:
+          type: integer
+        mineralMax:
+          type: integer
+        spiritMax:
+          type: integer
+        climate:
+          type: string
+        dominantSpecies:
+          type: ["string", "null"]
+        controllingKingdom:
+          type: ["string", "null"]
+        contested:
+          type: boolean
+        createdAt:
+          type: string
+
+    BeastKingdom:
+      type: object
+      required: [id, name, dominantSpecies, foundedDay, capital, militaryPower, economy, influence, population, territoryCount, status, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        dominantSpecies:
+          type: string
+        foundedDay:
+          type: integer
+        capital:
+          type: string
+        militaryPower:
+          type: integer
+        economy:
+          type: integer
+        influence:
+          type: integer
+        population:
+          type: integer
+        territoryCount:
+          type: integer
+        status:
+          type: string
+        createdAt:
+          type: string
+
+    BeastKingdomDetail:
+      allOf:
+        - $ref: "#/components/schemas/BeastKingdom"
+        - type: object
+          properties:
+            packs:
+              type: array
+              items:
+                $ref: "#/components/schemas/Pack"
+            territories:
+              type: array
+              items:
+                $ref: "#/components/schemas/Territory"
+            relations:
+              type: array
+              items:
+                $ref: "#/components/schemas/KingdomRelation"
+
+    Pack:
+      type: object
+      required: [id, speciesName, territory, population, leaderName, leaderLevel, leaderIntelligence, leaderCharisma, status, createdAt]
+      properties:
+        id:
+          type: integer
+        speciesName:
+          type: string
+        territory:
+          type: string
+        population:
+          type: integer
+        leaderName:
+          type: string
+        leaderLevel:
+          type: integer
+        leaderIntelligence:
+          type: integer
+        leaderCharisma:
+          type: integer
+        kingdomName:
+          type: ["string", "null"]
+        status:
+          type: string
+        createdAt:
+          type: string
+
+    KingdomRelation:
+      type: object
+      required: [id, kingdomNameA, kingdomNameB, relation, sinceDay, createdAt]
+      properties:
+        id:
+          type: integer
+        kingdomNameA:
+          type: string
+        kingdomNameB:
+          type: string
+        relation:
+          type: string
+        sinceDay:
           type: integer
         createdAt:
           type: string

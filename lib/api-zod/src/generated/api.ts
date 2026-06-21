@@ -44,7 +44,11 @@ export const GetDashboardResponse = zod.object({
   "mostPopulousCount": zod.number().nullish(),
   "newestSpeciesName": zod.string().nullish(),
   "evolvingSpeciesCount": zod.number().nullish(),
-  "mutatedSpeciesCount": zod.number().nullish()
+  "mutatedSpeciesCount": zod.number().nullish(),
+  "totalKingdoms": zod.number().nullish(),
+  "strongestKingdomName": zod.string().nullish(),
+  "richestKingdomName": zod.string().nullish(),
+  "largestKingdomName": zod.string().nullish()
 })
 
 
@@ -275,6 +279,144 @@ export const ListEvolutionPathsResponseItem = zod.object({
   "createdAt": zod.string().optional()
 })
 export const ListEvolutionPathsResponse = zod.array(ListEvolutionPathsResponseItem)
+
+
+/**
+ * @summary List all territories with resources
+ */
+export const ListTerritoriesResponseItem = zod.object({
+  "id": zod.number(),
+  "zoneName": zod.string(),
+  "food": zod.number(),
+  "water": zod.number(),
+  "mineral": zod.number(),
+  "spirit": zod.number(),
+  "foodMax": zod.number(),
+  "waterMax": zod.number(),
+  "mineralMax": zod.number(),
+  "spiritMax": zod.number(),
+  "climate": zod.string(),
+  "dominantSpecies": zod.string().nullish(),
+  "controllingKingdom": zod.string().nullish(),
+  "contested": zod.boolean(),
+  "createdAt": zod.string()
+})
+export const ListTerritoriesResponse = zod.array(ListTerritoriesResponseItem)
+
+
+/**
+ * @summary List all beast kingdoms ranked by influence
+ */
+export const ListKingdomsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "dominantSpecies": zod.string(),
+  "foundedDay": zod.number(),
+  "capital": zod.string(),
+  "militaryPower": zod.number(),
+  "economy": zod.number(),
+  "influence": zod.number(),
+  "population": zod.number(),
+  "territoryCount": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListKingdomsResponse = zod.array(ListKingdomsResponseItem)
+
+
+/**
+ * @summary Get kingdom detail with packs, territories, and relations
+ */
+export const GetKingdomParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const GetKingdomResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "dominantSpecies": zod.string(),
+  "foundedDay": zod.number(),
+  "capital": zod.string(),
+  "militaryPower": zod.number(),
+  "economy": zod.number(),
+  "influence": zod.number(),
+  "population": zod.number(),
+  "territoryCount": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+}).and(zod.object({
+  "packs": zod.array(zod.object({
+  "id": zod.number(),
+  "speciesName": zod.string(),
+  "territory": zod.string(),
+  "population": zod.number(),
+  "leaderName": zod.string(),
+  "leaderLevel": zod.number(),
+  "leaderIntelligence": zod.number(),
+  "leaderCharisma": zod.number(),
+  "kingdomName": zod.string().nullish(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+})).optional(),
+  "territories": zod.array(zod.object({
+  "id": zod.number(),
+  "zoneName": zod.string(),
+  "food": zod.number(),
+  "water": zod.number(),
+  "mineral": zod.number(),
+  "spirit": zod.number(),
+  "foodMax": zod.number(),
+  "waterMax": zod.number(),
+  "mineralMax": zod.number(),
+  "spiritMax": zod.number(),
+  "climate": zod.string(),
+  "dominantSpecies": zod.string().nullish(),
+  "controllingKingdom": zod.string().nullish(),
+  "contested": zod.boolean(),
+  "createdAt": zod.string()
+})).optional(),
+  "relations": zod.array(zod.object({
+  "id": zod.number(),
+  "kingdomNameA": zod.string(),
+  "kingdomNameB": zod.string(),
+  "relation": zod.string(),
+  "sinceDay": zod.number(),
+  "createdAt": zod.string()
+})).optional()
+}))
+
+
+/**
+ * @summary List all active packs
+ */
+export const ListPacksResponseItem = zod.object({
+  "id": zod.number(),
+  "speciesName": zod.string(),
+  "territory": zod.string(),
+  "population": zod.number(),
+  "leaderName": zod.string(),
+  "leaderLevel": zod.number(),
+  "leaderIntelligence": zod.number(),
+  "leaderCharisma": zod.number(),
+  "kingdomName": zod.string().nullish(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListPacksResponse = zod.array(ListPacksResponseItem)
+
+
+/**
+ * @summary List all diplomacy relations between kingdoms
+ */
+export const ListKingdomRelationsResponseItem = zod.object({
+  "id": zod.number(),
+  "kingdomNameA": zod.string(),
+  "kingdomNameB": zod.string(),
+  "relation": zod.string(),
+  "sinceDay": zod.number(),
+  "createdAt": zod.string()
+})
+export const ListKingdomRelationsResponse = zod.array(ListKingdomRelationsResponseItem)
 
 
 /**

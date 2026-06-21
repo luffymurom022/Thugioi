@@ -28,4 +28,12 @@ export interface DashboardSummary {
   evolvingSpeciesCount?: number | null;
   /** @nullable */
   mutatedSpeciesCount?: number | null;
+  /** @nullable */
+  totalKingdoms?: number | null;
+  /** @nullable */
+  strongestKingdomName?: string | null;
+  /** @nullable */
+  richestKingdomName?: string | null;
+  /** @nullable */
+  largestKingdomName?: string | null;
 }

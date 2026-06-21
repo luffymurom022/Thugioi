@@ -20,6 +20,8 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  BeastKingdom,
+  BeastKingdomDetail,
   BreedingInput,
   BreedingResult,
   Creature,
@@ -28,8 +30,11 @@ import type {
   GeneticsPreview,
   HealthStatus,
   HistoryEntry,
+  KingdomRelation,
   ListCreaturesParams,
   ListHistoryParams,
+  Pack,
+  Territory,
   TickResult,
   Zone,
   ZoneDetail
@@ -806,6 +811,391 @@ export function useListEvolutionPaths<TData = Awaited<ReturnType<typeof listEvol
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getListEvolutionPathsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListTerritoriesUrl = () => {
+
+
+
+
+  return `/api/territories`
+}
+
+/**
+ * @summary List all territories with resources
+ */
+export const listTerritories = async ( options?: RequestInit): Promise<Territory[]> => {
+
+  return customFetch<Territory[]>(getListTerritoriesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListTerritoriesQueryKey = () => {
+    return [
+    `/api/territories`
+    ] as const;
+    }
+
+
+export const getListTerritoriesQueryOptions = <TData = Awaited<ReturnType<typeof listTerritories>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listTerritories>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListTerritoriesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listTerritories>>> = ({ signal }) => listTerritories({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listTerritories>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListTerritoriesQueryResult = NonNullable<Awaited<ReturnType<typeof listTerritories>>>
+export type ListTerritoriesQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all territories with resources
+ */
+
+export function useListTerritories<TData = Awaited<ReturnType<typeof listTerritories>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listTerritories>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListTerritoriesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListKingdomsUrl = () => {
+
+
+
+
+  return `/api/kingdoms`
+}
+
+/**
+ * @summary List all beast kingdoms ranked by influence
+ */
+export const listKingdoms = async ( options?: RequestInit): Promise<BeastKingdom[]> => {
+
+  return customFetch<BeastKingdom[]>(getListKingdomsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListKingdomsQueryKey = () => {
+    return [
+    `/api/kingdoms`
+    ] as const;
+    }
+
+
+export const getListKingdomsQueryOptions = <TData = Awaited<ReturnType<typeof listKingdoms>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listKingdoms>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListKingdomsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listKingdoms>>> = ({ signal }) => listKingdoms({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listKingdoms>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListKingdomsQueryResult = NonNullable<Awaited<ReturnType<typeof listKingdoms>>>
+export type ListKingdomsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all beast kingdoms ranked by influence
+ */
+
+export function useListKingdoms<TData = Awaited<ReturnType<typeof listKingdoms>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listKingdoms>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListKingdomsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetKingdomUrl = (id: number,) => {
+
+
+
+
+  return `/api/kingdoms/${id}`
+}
+
+/**
+ * @summary Get kingdom detail with packs, territories, and relations
+ */
+export const getKingdom = async (id: number, options?: RequestInit): Promise<BeastKingdomDetail> => {
+
+  return customFetch<BeastKingdomDetail>(getGetKingdomUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetKingdomQueryKey = (id: number,) => {
+    return [
+    `/api/kingdoms/${id}`
+    ] as const;
+    }
+
+
+export const getGetKingdomQueryOptions = <TData = Awaited<ReturnType<typeof getKingdom>>, TError = ErrorType<void>>(id: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getKingdom>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetKingdomQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getKingdom>>> = ({ signal }) => getKingdom(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getKingdom>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetKingdomQueryResult = NonNullable<Awaited<ReturnType<typeof getKingdom>>>
+export type GetKingdomQueryError = ErrorType<void>
+
+
+/**
+ * @summary Get kingdom detail with packs, territories, and relations
+ */
+
+export function useGetKingdom<TData = Awaited<ReturnType<typeof getKingdom>>, TError = ErrorType<void>>(
+ id: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getKingdom>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetKingdomQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListPacksUrl = () => {
+
+
+
+
+  return `/api/packs`
+}
+
+/**
+ * @summary List all active packs
+ */
+export const listPacks = async ( options?: RequestInit): Promise<Pack[]> => {
+
+  return customFetch<Pack[]>(getListPacksUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListPacksQueryKey = () => {
+    return [
+    `/api/packs`
+    ] as const;
+    }
+
+
+export const getListPacksQueryOptions = <TData = Awaited<ReturnType<typeof listPacks>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPacks>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListPacksQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listPacks>>> = ({ signal }) => listPacks({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listPacks>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListPacksQueryResult = NonNullable<Awaited<ReturnType<typeof listPacks>>>
+export type ListPacksQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all active packs
+ */
+
+export function useListPacks<TData = Awaited<ReturnType<typeof listPacks>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPacks>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListPacksQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListKingdomRelationsUrl = () => {
+
+
+
+
+  return `/api/kingdom-relations`
+}
+
+/**
+ * @summary List all diplomacy relations between kingdoms
+ */
+export const listKingdomRelations = async ( options?: RequestInit): Promise<KingdomRelation[]> => {
+
+  return customFetch<KingdomRelation[]>(getListKingdomRelationsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListKingdomRelationsQueryKey = () => {
+    return [
+    `/api/kingdom-relations`
+    ] as const;
+    }
+
+
+export const getListKingdomRelationsQueryOptions = <TData = Awaited<ReturnType<typeof listKingdomRelations>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listKingdomRelations>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListKingdomRelationsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listKingdomRelations>>> = ({ signal }) => listKingdomRelations({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listKingdomRelations>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListKingdomRelationsQueryResult = NonNullable<Awaited<ReturnType<typeof listKingdomRelations>>>
+export type ListKingdomRelationsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all diplomacy relations between kingdoms
+ */
+
+export function useListKingdomRelations<TData = Awaited<ReturnType<typeof listKingdomRelations>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listKingdomRelations>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListKingdomRelationsQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

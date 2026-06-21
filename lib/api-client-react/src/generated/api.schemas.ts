@@ -118,6 +118,14 @@ export interface DashboardSummary {
   evolvingSpeciesCount?: number | null;
   /** @nullable */
   mutatedSpeciesCount?: number | null;
+  /** @nullable */
+  totalKingdoms?: number | null;
+  /** @nullable */
+  strongestKingdomName?: string | null;
+  /** @nullable */
+  richestKingdomName?: string | null;
+  /** @nullable */
+  largestKingdomName?: string | null;
 }
 
 export interface CreaturePopulation {
@@ -146,6 +154,71 @@ export interface EvolutionPath {
   minAgeTicks: number;
   createdAt?: string;
 }
+
+export interface Territory {
+  id: number;
+  zoneName: string;
+  food: number;
+  water: number;
+  mineral: number;
+  spirit: number;
+  foodMax: number;
+  waterMax: number;
+  mineralMax: number;
+  spiritMax: number;
+  climate: string;
+  /** @nullable */
+  dominantSpecies?: string | null;
+  /** @nullable */
+  controllingKingdom?: string | null;
+  contested: boolean;
+  createdAt: string;
+}
+
+export interface BeastKingdom {
+  id: number;
+  name: string;
+  dominantSpecies: string;
+  foundedDay: number;
+  capital: string;
+  militaryPower: number;
+  economy: number;
+  influence: number;
+  population: number;
+  territoryCount: number;
+  status: string;
+  createdAt: string;
+}
+
+export interface Pack {
+  id: number;
+  speciesName: string;
+  territory: string;
+  population: number;
+  leaderName: string;
+  leaderLevel: number;
+  leaderIntelligence: number;
+  leaderCharisma: number;
+  /** @nullable */
+  kingdomName?: string | null;
+  status: string;
+  createdAt: string;
+}
+
+export interface KingdomRelation {
+  id: number;
+  kingdomNameA: string;
+  kingdomNameB: string;
+  relation: string;
+  sinceDay: number;
+  createdAt: string;
+}
+
+export type BeastKingdomDetail = BeastKingdom & {
+  packs?: Pack[];
+  territories?: Territory[];
+  relations?: KingdomRelation[];
+};
 
 export interface DNAProfile {
   strength: number;

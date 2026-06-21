@@ -1,0 +1,207 @@
+Nâng cấp dự án THÚ GIỚI AI hiện tại thành V5 - TERRITORY & BEAST KINGDOM SYSTEM.
+
+Không thay đổi các hệ thống hiện có.
+
+Mục tiêu:
+
+Sinh vật không chỉ tồn tại.
+
+Chúng phải chiếm lãnh thổ, lập bầy đàn, hình thành quốc gia thú và tranh giành tài nguyên.
+
+========================
+TERRITORY SYSTEM
+
+Mỗi vùng có:
+
+{
+id,
+name,
+resources,
+climate,
+maxPopulation,
+dominantSpecies,
+controllingFaction
+}
+
+Ví dụ:
+
+Hỏa Sơn Vực
+Băng Tuyết Vực
+Cổ Mộc Vực
+Lôi Đình Vực
+Hắc Ám Vực
+
+========================
+RESOURCE SYSTEM
+
+Mỗi lãnh thổ có:
+
+* Thức ăn
+* Nước
+* Khoáng sản
+* Linh khí
+
+Tài nguyên tự hồi phục theo thời gian.
+
+Nếu tài nguyên cạn:
+
+* Sinh vật chết đói
+* Di cư
+* Chiến tranh
+
+========================
+PACK SYSTEM
+
+Sinh vật cùng loài tạo thành bầy.
+
+Ví dụ:
+
+Hỏa Lang Tộc
+
+Population: 1200
+
+Leader:
+Hỏa Lang Vương
+
+Territory:
+Hỏa Sơn Vực
+
+========================
+BEAST KINGDOM SYSTEM
+
+Khi một tộc đủ mạnh:
+
+Tự thành lập quốc gia.
+
+Ví dụ:
+
+Thiên Hỏa Lang Quốc
+
+Loài thống trị:
+Thiên Hỏa Lang
+
+Thủ đô:
+Hỏa Sơn Vực
+
+Dân số:
+120000
+
+========================
+INFLUENCE SYSTEM
+
+Mỗi quốc gia có:
+
+* Quân lực
+* Kinh tế
+* Tài nguyên
+* Ảnh hưởng
+
+Xếp hạng theo sức mạnh.
+
+========================
+EXPANSION SYSTEM
+
+Nếu dân số vượt ngưỡng:
+
+Tự động mở rộng lãnh thổ.
+
+Chiếm vùng lân cận.
+
+========================
+MIGRATION SYSTEM
+
+Khi:
+
+* Thiếu thức ăn
+* Quá đông
+* Thiên tai
+
+Sinh vật tự di cư.
+
+========================
+BEAST LEADER
+
+Mỗi bầy có:
+
+Leader
+
+Các thuộc tính:
+
+* level
+* rank
+* intelligence
+* charisma
+
+Leader ảnh hưởng:
+
+* tỷ lệ sinh sản
+* chiến đấu
+* mở rộng
+
+========================
+WORLD MAP
+
+Nâng cấp bản đồ.
+
+Hiển thị:
+
+* lãnh thổ
+* quốc gia thú
+* vùng tranh chấp
+* dân số
+
+Mỗi lãnh thổ có màu riêng.
+
+========================
+DIPLOMACY SYSTEM
+
+Các quốc gia thú có thể:
+
+* Liên minh
+* Trung lập
+* Thù địch
+
+Quan hệ thay đổi theo thời gian.
+
+========================
+HISTORY SYSTEM
+
+Ghi log:
+
+[Năm 342]
+
+Thiên Hỏa Lang Quốc thành lập.
+
+[Năm 357]
+
+Lôi Đình Ưng Quốc chiếm Lôi Đình Vực.
+
+[Năm 365]
+
+Hai quốc gia ký hiệp ước liên minh.
+
+========================
+DASHBOARD
+
+Thêm:
+
+* Tổng quốc gia thú
+* Quốc gia mạnh nhất
+* Quốc gia giàu nhất
+* Quốc gia đông dân nhất
+* Lãnh thổ lớn nhất
+
+========================
+YÊU CẦU
+
+Thiết kế để hỗ trợ:
+
+* Hàng nghìn loài
+* Hàng trăm quốc gia thú
+* Hàng triệu cá thể
+
+Tối ưu hiệu năng.
+
+Mọi hành động phải do World Engine tự quyết định.
+
+Không cần người chơi điều khiển.
