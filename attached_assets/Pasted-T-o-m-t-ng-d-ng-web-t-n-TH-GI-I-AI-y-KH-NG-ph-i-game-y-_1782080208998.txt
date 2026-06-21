@@ -1,0 +1,231 @@
+Tạo một ứng dụng web tên:
+
+THÚ GIỚI AI
+
+Đây KHÔNG phải game.
+
+Đây là một hệ sinh thái mô phỏng thế giới sinh vật giống Pokémon, nhưng toàn bộ sinh vật tự sinh sống và phát triển mà không cần người chơi điều khiển.
+
+========================
+CÔNG NGHỆ
+========================
+
+Frontend:
+- React
+- TypeScript
+- TailwindCSS
+
+Backend:
+- NodeJS
+- Express
+
+Database:
+- SQLite
+
+========================
+MỤC TIÊU V1
+========================
+
+Xây dựng một thế giới sinh vật sống.
+
+Mỗi sinh vật có thể:
+
+- Sinh sản
+- Già hóa
+- Chết
+- Tăng dân số
+- Lai tạo tạo giống mới
+
+Không cần chiến đấu.
+Không cần 3D.
+Không cần AR.
+Không cần đăng nhập.
+
+Ưu tiên mô phỏng.
+
+========================
+GIAO DIỆN
+========================
+
+Phong cách:
+
+- Hologram
+- Sci-fi
+- Vũ trụ
+- Màu xanh dương và tím
+- Dark mode
+
+Menu trái:
+
+- Dashboard
+- Bản đồ
+- Beastdex
+- Lai tạo
+- Lịch sử
+
+========================
+THÚ GIỚI
+========================
+
+Tạo sẵn các khu vực:
+
+1. Hỏa Sơn Vực
+2. Băng Tuyết Vực
+3. Cổ Mộc Vực
+
+Mỗi khu vực có:
+
+- Tên
+- Nhiệt độ
+- Tài nguyên
+- Sức chứa quần thể
+
+========================
+CẤP BẬC SINH VẬT
+========================
+
+1. Động Vật
+2. Dã Thú
+3. Hoang Thú
+4. Linh Thú
+5. Hoàng Thú
+6. Vương Thú
+7. Tôn Thú
+8. Đế Thú
+9. Thánh Thú
+10. Thần Thú
+11. Tiên Thú
+12. Tổ Thú
+13. Sáng Thần Thú
+
+========================
+SINH VẬT BAN ĐẦU
+========================
+
+Hỏa Lang
+Lôi Ưng
+Kim Giáp Hổ
+Huyền Xà
+Băng Hồ
+
+Mỗi sinh vật có:
+
+{
+ id,
+ name,
+ rank,
+ element,
+ habitat,
+ population,
+ lifespan,
+ reproductionRate,
+ description
+}
+
+========================
+HỆ NGUYÊN TỐ
+========================
+
+- Hỏa
+- Thủy
+- Lôi
+- Phong
+- Thổ
+- Băng
+- Quang
+- Ám
+
+========================
+MÔ PHỎNG THỜI GIAN
+========================
+
+Tạo World Engine.
+
+Mỗi 10 giây:
+
+- Sinh sản
+- Chết tự nhiên
+- Cập nhật dân số
+
+Nếu dân số bằng 0:
+
+Đánh dấu tuyệt chủng.
+
+========================
+LAI TẠO
+========================
+
+Tạo trang Lai Tạo.
+
+Người dùng chọn:
+
+Sinh vật A
++
+Sinh vật B
+
+Hệ thống tạo:
+
+- Tên mới
+- Hệ mới
+- Mô tả mới
+- Dân số khởi tạo
+
+Ví dụ:
+
+Hỏa Lang
++
+Lôi Ưng
+
+=
+
+Lôi Diễm Lang Ưng
+
+Loài mới được lưu vào database.
+
+========================
+BEASTDEX
+========================
+
+Hiển thị toàn bộ loài.
+
+Mỗi loài có:
+
+- Tên
+- Cấp bậc
+- Hệ
+- Nơi sống
+- Dân số
+- Trạng thái
+
+Có trang chi tiết.
+
+========================
+LỊCH SỬ THẾ GIỚI
+========================
+
+Tự động ghi log:
+
+Ví dụ:
+
+[Ngày 1]
+Hỏa Lang sinh thêm 23 cá thể.
+
+[Ngày 2]
+Lôi Ưng sinh thêm 15 cá thể.
+
+[Ngày 3]
+Loài mới xuất hiện:
+Lôi Diễm Lang Ưng.
+
+========================
+YÊU CẦU
+========================
+
+- Viết code hoàn chỉnh
+- Chạy được ngay
+- Có dữ liệu mẫu
+- Có cấu trúc thư mục rõ ràng
+- Có giao diện đẹp
+- Responsive
+- Ưu tiên mô phỏng thế giới trước
+- Chưa cần đồ họa 3D
