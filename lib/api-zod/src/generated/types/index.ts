@@ -11,6 +11,7 @@ export * from './breedingResult';
 export * from './creature';
 export * from './creaturePopulation';
 export * from './dashboardSummary';
+export * from './evolutionPath';
 export * from './healthStatus';
 export * from './historyEntry';
 export * from './listCreaturesParams';

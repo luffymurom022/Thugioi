@@ -24,6 +24,7 @@ import type {
   BreedingResult,
   Creature,
   DashboardSummary,
+  EvolutionPath,
   HealthStatus,
   HistoryEntry,
   ListCreaturesParams,
@@ -738,4 +739,81 @@ export const useSimulationTick = <TError = ErrorType<unknown>,
       > => {
       return useMutation(getSimulationTickMutationOptions(options));
     }
+
+export const getListEvolutionPathsUrl = () => {
+
+
+
+
+  return `/api/evolution-paths`
+}
+
+/**
+ * @summary Get all evolution paths with conditions
+ */
+export const listEvolutionPaths = async ( options?: RequestInit): Promise<EvolutionPath[]> => {
+
+  return customFetch<EvolutionPath[]>(getListEvolutionPathsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListEvolutionPathsQueryKey = () => {
+    return [
+    `/api/evolution-paths`
+    ] as const;
+    }
+
+
+export const getListEvolutionPathsQueryOptions = <TData = Awaited<ReturnType<typeof listEvolutionPaths>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listEvolutionPaths>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListEvolutionPathsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listEvolutionPaths>>> = ({ signal }) => listEvolutionPaths({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listEvolutionPaths>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListEvolutionPathsQueryResult = NonNullable<Awaited<ReturnType<typeof listEvolutionPaths>>>
+export type ListEvolutionPathsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get all evolution paths with conditions
+ */
+
+export function useListEvolutionPaths<TData = Awaited<ReturnType<typeof listEvolutionPaths>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listEvolutionPaths>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListEvolutionPathsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
 

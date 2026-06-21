@@ -42,7 +42,9 @@ export const GetDashboardResponse = zod.object({
   "strongestSpeciesName": zod.string().nullish(),
   "mostPopulousSpeciesName": zod.string().nullish(),
   "mostPopulousCount": zod.number().nullish(),
-  "newestSpeciesName": zod.string().nullish()
+  "newestSpeciesName": zod.string().nullish(),
+  "evolvingSpeciesCount": zod.number().nullish(),
+  "mutatedSpeciesCount": zod.number().nullish()
 })
 
 
@@ -80,8 +82,11 @@ export const ListCreaturesResponseItem = zod.object({
   "generation": zod.number().optional(),
   "huntSuccesses": zod.number().optional(),
   "evolutionStage": zod.number().optional(),
+  "evolutionChain": zod.string().optional(),
   "dietType": zod.string().optional(),
-  "maxPopulation": zod.number().optional()
+  "maxPopulation": zod.number().optional(),
+  "mutationChance": zod.number().optional(),
+  "isMutant": zod.boolean().optional()
 })
 export const ListCreaturesResponse = zod.array(ListCreaturesResponseItem)
 
@@ -118,8 +123,11 @@ export const GetCreatureResponse = zod.object({
   "generation": zod.number().optional(),
   "huntSuccesses": zod.number().optional(),
   "evolutionStage": zod.number().optional(),
+  "evolutionChain": zod.string().optional(),
   "dietType": zod.string().optional(),
-  "maxPopulation": zod.number().optional()
+  "maxPopulation": zod.number().optional(),
+  "mutationChance": zod.number().optional(),
+  "isMutant": zod.boolean().optional()
 })
 
 
@@ -178,8 +186,11 @@ export const GetZoneResponse = zod.object({
   "generation": zod.number().optional(),
   "huntSuccesses": zod.number().optional(),
   "evolutionStage": zod.number().optional(),
+  "evolutionChain": zod.string().optional(),
   "dietType": zod.string().optional(),
-  "maxPopulation": zod.number().optional()
+  "maxPopulation": zod.number().optional(),
+  "mutationChance": zod.number().optional(),
+  "isMutant": zod.boolean().optional()
 }))
 })
 
@@ -227,5 +238,24 @@ export const SimulationTickResponse = zod.object({
   "status": zod.string()
 }))
 })
+
+
+/**
+ * @summary Get all evolution paths with conditions
+ */
+export const ListEvolutionPathsResponseItem = zod.object({
+  "id": zod.number(),
+  "fromSpecies": zod.string(),
+  "toSpecies": zod.string(),
+  "toRank": zod.string(),
+  "toRankLevel": zod.number(),
+  "toElement": zod.string(),
+  "toDescription": zod.string(),
+  "minPopulation": zod.number(),
+  "minHuntSuccesses": zod.number(),
+  "minAgeTicks": zod.number(),
+  "createdAt": zod.string().optional()
+})
+export const ListEvolutionPathsResponse = zod.array(ListEvolutionPathsResponseItem)
 
 

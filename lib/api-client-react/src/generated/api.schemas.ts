@@ -36,8 +36,11 @@ export interface Creature {
   generation?: number;
   huntSuccesses?: number;
   evolutionStage?: number;
+  evolutionChain?: string;
   dietType?: string;
   maxPopulation?: number;
+  mutationChance?: number;
+  isMutant?: boolean;
 }
 
 export interface Zone {
@@ -103,6 +106,10 @@ export interface DashboardSummary {
   mostPopulousCount?: number | null;
   /** @nullable */
   newestSpeciesName?: string | null;
+  /** @nullable */
+  evolvingSpeciesCount?: number | null;
+  /** @nullable */
+  mutatedSpeciesCount?: number | null;
 }
 
 export interface CreaturePopulation {
@@ -116,6 +123,20 @@ export interface TickResult {
   worldDay: number;
   events: string[];
   populations: CreaturePopulation[];
+}
+
+export interface EvolutionPath {
+  id: number;
+  fromSpecies: string;
+  toSpecies: string;
+  toRank: string;
+  toRankLevel: number;
+  toElement: string;
+  toDescription: string;
+  minPopulation: number;
+  minHuntSuccesses: number;
+  minAgeTicks: number;
+  createdAt?: string;
 }
 
 export type ListCreaturesParams = {

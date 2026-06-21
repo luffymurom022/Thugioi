@@ -9,6 +9,7 @@ import BeastdexPage from "@/pages/beastdex";
 import CreatureDetail from "@/pages/creature-detail";
 import BreedingPage from "@/pages/breeding";
 import HistoryPage from "@/pages/history";
+import EvolutionTreePage from "@/pages/evolution-tree";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/beastdex/:id" component={CreatureDetail} />
         <Route path="/breeding" component={BreedingPage} />
         <Route path="/history" component={HistoryPage} />
+        <Route path="/evolution" component={EvolutionTreePage} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

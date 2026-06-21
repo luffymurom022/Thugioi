@@ -19,6 +19,8 @@ tags:
     description: World history log
   - name: dashboard
     description: Dashboard summary
+  - name: evolution
+    description: Evolution system
 paths:
   /healthz:
     get:
@@ -191,6 +193,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/TickResult"
 
+  /evolution-paths:
+    get:
+      operationId: listEvolutionPaths
+      tags: [evolution]
+      summary: Get all evolution paths with conditions
+      responses:
+        "200":
+          description: Evolution paths
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EvolutionPath"
+
 components:
   schemas:
     HealthStatus:
@@ -253,10 +270,16 @@ components:
           type: integer
         evolutionStage:
           type: integer
+        evolutionChain:
+          type: string
         dietType:
           type: string
         maxPopulation:
           type: integer
+        mutationChance:
+          type: number
+        isMutant:
+          type: boolean
 
     Zone:
       type: object
@@ -363,6 +386,10 @@ components:
           type: ["integer", "null"]
         newestSpeciesName:
           type: ["string", "null"]
+        evolvingSpeciesCount:
+          type: ["integer", "null"]
+        mutatedSpeciesCount:
+          type: ["integer", "null"]
 
     ZoneStat:
       type: object
@@ -405,4 +432,31 @@ components:
         population:
           type: integer
         status:
+          type: string
+
+    EvolutionPath:
+      type: object
+      required: [id, fromSpecies, toSpecies, toRank, toRankLevel, toElement, minPopulation, minHuntSuccesses, minAgeTicks, toDescription]
+      properties:
+        id:
+          type: integer
+        fromSpecies:
+          type: string
+        toSpecies:
+          type: string
+        toRank:
+          type: string
+        toRankLevel:
+          type: integer
+        toElement:
+          type: string
+        toDescription:
+          type: string
+        minPopulation:
+          type: integer
+        minHuntSuccesses:
+          type: integer
+        minAgeTicks:
+          type: integer
+        createdAt:
           type: string

@@ -1,0 +1,153 @@
+Nâng cấp dự án THÚ GIỚI AI hiện tại thành V3 - EVOLUTION ENGINE.
+
+Không thay đổi giao diện hiện có.
+Không làm 3D.
+Không làm AR/VR.
+Không làm battle system.
+
+Mục tiêu:
+Sinh vật có thể tiến hóa tự động theo thời gian.
+
+========================
+HỆ CẤP BẬC
+
+1. Động Vật
+2. Dã Thú
+3. Hoang Thú
+4. Linh Thú
+5. Hoàng Thú
+6. Vương Thú
+7. Tôn Thú
+8. Đế Thú
+9. Thánh Thú
+10. Thần Thú
+11. Tiên Thú
+12. Tổ Thú
+13. Sáng Thần Thú
+
+========================
+DỮ LIỆU MỚI CHO MỖI LOÀI
+
+Thêm các thuộc tính:
+
+* age
+* energy
+* huntCount
+* generation
+* mutationChance
+* evolutionStage
+* evolutionTree
+
+========================
+CÂY TIẾN HÓA
+
+Ví dụ:
+
+Hỏa Lang
+→ Huyết Lang
+→ Viêm Lang
+→ Thiên Hỏa Lang
+→ Xích Dương Lang Vương
+
+Lôi Ưng
+→ Lôi Vũ Ưng
+→ Thiên Lôi Ưng
+→ Lôi Hoàng Ưng
+
+Kim Giáp Hổ
+→ Thiết Giáp Hổ
+→ Hoàng Kim Hổ
+→ Hổ Vương
+
+========================
+ĐIỀU KIỆN TIẾN HÓA
+
+Ví dụ:
+
+Hỏa Lang → Huyết Lang:
+
+* age >= 5
+* energy >= 80
+* huntCount >= 50
+
+Huyết Lang → Viêm Lang:
+
+* age >= 10
+* huntCount >= 120
+* generation >= 2
+
+Tạo hệ thống kiểm tra điều kiện tự động.
+
+========================
+WORLD ENGINE
+
+Mỗi chu kỳ mô phỏng:
+
+1. Tăng tuổi
+2. Giảm năng lượng
+3. Cập nhật số lần săn
+4. Kiểm tra điều kiện tiến hóa
+5. Nếu đủ điều kiện thì tiến hóa
+
+========================
+ĐỘT BIẾN
+
+Mỗi lần sinh sản:
+
+* mutationChance mặc định = 1%
+
+Nếu đột biến:
+
+* tăng ngẫu nhiên chỉ số
+* đổi màu hiển thị
+* thêm tag Dị Chủng
+
+Ví dụ:
+Hỏa Lang Dị Chủng.
+
+========================
+EVOLUTION TREE UI
+
+Tạo trang mới:
+
+Evolution Tree
+
+Sử dụng React Flow để hiển thị cây tiến hóa.
+
+Hiển thị:
+
+* tên loài
+* cấp bậc
+* hệ nguyên tố
+* điều kiện tiến hóa
+
+========================
+LỊCH SỬ THẾ GIỚI
+
+Tự động ghi log:
+
+[Năm 142]
+Một Hỏa Lang đã tiến hóa thành Huyết Lang.
+
+[Năm 156]
+Loài mới xuất hiện: Viêm Lang.
+
+========================
+DASHBOARD
+
+Thêm thống kê:
+
+* Tổng loài
+* Loài đang tiến hóa
+* Loài đột biến
+* Loài tuyệt chủng
+* Loài mạnh nhất
+
+========================
+YÊU CẦU
+
+* Viết code hoàn chỉnh
+* Chạy được ngay
+* Không hard-code từng trường hợp
+* Thiết kế Evolution Engine có thể mở rộng cho hàng nghìn loài
+* Giữ phong cách giao diện hologram sci-fi hiện tại.

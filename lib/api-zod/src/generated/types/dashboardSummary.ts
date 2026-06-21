@@ -24,4 +24,8 @@ export interface DashboardSummary {
   mostPopulousCount?: number | null;
   /** @nullable */
   newestSpeciesName?: string | null;
+  /** @nullable */
+  evolvingSpeciesCount?: number | null;
+  /** @nullable */
+  mutatedSpeciesCount?: number | null;
 }

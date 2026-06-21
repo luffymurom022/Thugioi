@@ -33,6 +33,8 @@ export const creaturesTable = pgTable("creatures", {
   evolutionChain: text("evolution_chain").notNull().default("[]"),
   maxPopulation: integer("max_population").notNull().default(2000),
   dietType: text("diet_type").notNull().default("herbivore"),
+  mutationChance: real("mutation_chance").notNull().default(0.01),
+  isMutant: boolean("is_mutant").notNull().default(false),
 });
 
 export const insertCreatureSchema = createInsertSchema(creaturesTable).omit({ id: true, createdAt: true });

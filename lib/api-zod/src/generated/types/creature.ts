@@ -33,6 +33,9 @@ export interface Creature {
   generation?: number;
   huntSuccesses?: number;
   evolutionStage?: number;
+  evolutionChain?: string;
   dietType?: string;
   maxPopulation?: number;
+  mutationChance?: number;
+  isMutant?: boolean;
 }
