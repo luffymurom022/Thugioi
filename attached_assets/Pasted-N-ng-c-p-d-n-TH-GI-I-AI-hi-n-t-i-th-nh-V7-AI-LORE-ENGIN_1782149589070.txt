@@ -1,0 +1,225 @@
+Nâng cấp dự án THÚ GIỚI AI hiện tại thành V7 - AI LORE ENGINE.
+
+Không thay đổi các hệ thống hiện có.
+
+Mục tiêu:
+
+Biến Thú Giới từ một hệ mô phỏng thành một thế giới có lịch sử, truyền thuyết, thần thoại và văn minh riêng.
+
+AI phải tự tạo ra nội dung dựa trên dữ liệu thật từ thế giới.
+
+Không được tạo ngẫu nhiên vô nghĩa.
+
+Mọi câu chuyện phải dựa trên các sự kiện đã xảy ra.
+
+=================================
+WORLD CHRONICLE
+===============
+
+Tạo sử ký thế giới.
+
+Ví dụ:
+
+Năm 120
+
+Thiên Hỏa Lang Quốc được thành lập.
+
+Năm 145
+
+Đại Chiến Hỏa Sơn bùng nổ.
+
+Năm 168
+
+Lôi Đình Ưng Quốc sụp đổ.
+
+AI phải tự tổng hợp các sự kiện.
+
+=================================
+AGE SYSTEM
+==========
+
+Tạo các Kỷ Nguyên.
+
+Ví dụ:
+
+Kỷ Nguyên Khai Sinh
+
+Kỷ Nguyên Vạn Thú
+
+Kỷ Nguyên Chinh Chiến
+
+Kỷ Nguyên Thần Thú
+
+Kỷ Nguyên Hỗn Độn
+
+AI tự xác định khi nào chuyển kỷ nguyên.
+
+=================================
+LEGEND SYSTEM
+=============
+
+Tạo truyền thuyết.
+
+Ví dụ:
+
+Truyền thuyết kể rằng
+Cửu Dương Lang Đế từng thống nhất toàn bộ Hỏa Sơn Vực.
+
+Các truyền thuyết dựa trên dữ liệu lịch sử thật.
+
+=================================
+HERO SYSTEM
+===========
+
+Sinh ra nhân vật huyền thoại.
+
+Ví dụ:
+
+Tên:
+Cửu Dương Lang Đế
+
+Chủng tộc:
+Thiên Hỏa Lang
+
+Thành tựu:
+
+* Chinh phục 32 lãnh thổ
+* Thành lập đế quốc
+* Đánh bại 12 Thú Vương
+
+AI tự tạo tiểu sử.
+
+=================================
+MYTHOLOGY SYSTEM
+================
+
+Tạo thần thoại.
+
+Ví dụ:
+
+Theo thần thoại cổ đại.
+
+Sáng Thần Thú đầu tiên đã tạo ra Hỏa Sơn Vực.
+
+AI tự xây dựng thần thoại từ lịch sử.
+
+=================================
+BLOODLINE HISTORY
+=================
+
+Mỗi huyết mạch có lịch sử riêng.
+
+Ví dụ:
+
+Huyết mạch:
+
+Thái Dương Lang Tộc
+
+Tổ tiên:
+
+Kim Ô Thần Lang
+
+Tuổi:
+
+12800 năm
+
+=================================
+BOOK SYSTEM
+===========
+
+Tạo thư viện.
+
+Các loại sách:
+
+* Sử ký
+* Truyền thuyết
+* Huyết mạch
+* Quốc gia
+* Chiến tranh
+* Thần thoại
+
+AI tự viết nội dung.
+
+=================================
+NEWS SYSTEM
+===========
+
+Tạo báo chí thời gian thực.
+
+Ví dụ:
+
+TIN NÓNG
+
+Thiên Hỏa Lang Quốc vừa chiếm thêm 3 lãnh thổ.
+
+Xuất hiện Thần Thú mới.
+
+=================================
+AI STORY GENERATOR
+==================
+
+Từ dữ liệu thế giới.
+
+AI tạo:
+
+* Truyện ngắn
+* Biên niên sử
+* Tiểu sử anh hùng
+* Truyền thuyết
+
+Không được bịa dữ liệu ngoài hệ thống.
+
+=================================
+WORLD TIMELINE
+==============
+
+Tạo timeline kéo dài hàng nghìn năm.
+
+Hiển thị:
+
+* Chiến tranh
+* Tiến hóa
+* Tuyệt chủng
+* Thành lập quốc gia
+* Sinh ra Thần Thú
+
+=================================
+LOREDEX
+=======
+
+Tạo trang mới:
+
+Loredex
+
+Bao gồm:
+
+* Thần thoại
+* Truyền thuyết
+* Anh hùng
+* Quốc gia
+* Huyết mạch
+* Kỷ nguyên
+
+=================================
+DASHBOARD
+=========
+
+Thêm:
+
+* Kỷ nguyên hiện tại
+* Anh hùng nổi tiếng nhất
+* Huyết mạch mạnh nhất
+* Đế quốc lớn nhất lịch sử
+* Sự kiện lớn gần nhất
+
+=================================
+YÊU CẦU
+=======
+
+AI phải sử dụng dữ liệu thực tế từ World Engine.
+
+Không sinh lore ngẫu nhiên.
+
+Mọi truyền thuyết phải có nguồn gốc từ các sự kiện đã diễn ra trong Thú Giới.
+
+Biến Thú Giới thành một thế giới có lịch sử sống kéo dài hàng nghìn năm.

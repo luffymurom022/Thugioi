@@ -19,6 +19,7 @@ tags:
   - name: territories
   - name: wars
   - name: heroes
+  - name: lore
 paths:
   /healthz:
     get:
@@ -337,6 +338,141 @@ paths:
                 $ref: "#/components/schemas/GeneticsPreview"
         "400":
           description: Invalid input
+
+  /lore/ages:
+    get:
+      operationId: listLoreAges
+      tags: [lore]
+      summary: List all world ages/eras
+      responses:
+        "200":
+          description: List of world ages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorldAge"
+
+  /lore/current-age:
+    get:
+      operationId: getCurrentAge
+      tags: [lore]
+      summary: Get the current world age
+      responses:
+        "200":
+          description: Current world age
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorldAge"
+
+  /lore/legends:
+    get:
+      operationId: listLegends
+      tags: [lore]
+      summary: List all legends
+      responses:
+        "200":
+          description: List of legends
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Legend"
+
+  /lore/myths:
+    get:
+      operationId: listMyths
+      tags: [lore]
+      summary: List all myths
+      responses:
+        "200":
+          description: List of myths
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Myth"
+
+  /lore/bloodlines:
+    get:
+      operationId: listBloodlineHistories
+      tags: [lore]
+      summary: List all bloodline histories
+      responses:
+        "200":
+          description: List of bloodline histories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BloodlineHistory"
+
+  /lore/books:
+    get:
+      operationId: listLoreBooks
+      tags: [lore]
+      summary: List all lore books
+      responses:
+        "200":
+          description: List of lore books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LoreBook"
+
+  /lore/news:
+    get:
+      operationId: listLoreNews
+      tags: [lore]
+      summary: List recent lore news articles
+      responses:
+        "200":
+          description: List of news articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LoreNews"
+
+  /lore/summary:
+    get:
+      operationId: getLoreSummary
+      tags: [lore]
+      summary: Get V7 lore summary for dashboard
+      responses:
+        "200":
+          description: Lore summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoreSummary"
+
+  /lore/generate:
+    post:
+      operationId: generateLore
+      tags: [lore]
+      summary: Trigger lore generation from current world data
+      responses:
+        "200":
+          description: Generation triggered
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, worldDay]
+                properties:
+                  success:
+                    type: boolean
+                  worldDay:
+                    type: integer
 
 components:
   schemas:
@@ -861,3 +997,142 @@ components:
           $ref: "#/components/schemas/DNAProfile"
         parentBDna:
           $ref: "#/components/schemas/DNAProfile"
+
+    WorldAge:
+      type: object
+      required: [id, name, startDay, description, trigger, isCurrent, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        startDay:
+          type: integer
+        endDay:
+          type: ["integer", "null"]
+        description:
+          type: string
+        trigger:
+          type: string
+        isCurrent:
+          type: boolean
+        createdAt:
+          type: string
+
+    Legend:
+      type: object
+      required: [id, title, content, category, relatedEntity, worldDay, createdAt]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+        sourceEventId:
+          type: ["integer", "null"]
+        relatedEntity:
+          type: string
+        worldDay:
+          type: integer
+        createdAt:
+          type: string
+
+    Myth:
+      type: object
+      required: [id, title, content, subject, subjectName, worldDay, createdAt]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        subject:
+          type: string
+        subjectName:
+          type: string
+        worldDay:
+          type: integer
+        createdAt:
+          type: string
+
+    BloodlineHistory:
+      type: object
+      required: [id, bloodlineName, ancestorName, totalAgeTicks, peakPopulation, content, createdAt]
+      properties:
+        id:
+          type: integer
+        bloodlineName:
+          type: string
+        ancestorName:
+          type: string
+        totalAgeTicks:
+          type: integer
+        peakPopulation:
+          type: integer
+        content:
+          type: string
+        createdAt:
+          type: string
+
+    LoreBook:
+      type: object
+      required: [id, title, category, content, worldDay, createdAt]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        category:
+          type: string
+        content:
+          type: string
+        worldDay:
+          type: integer
+        createdAt:
+          type: string
+
+    LoreNews:
+      type: object
+      required: [id, headline, content, category, worldDay, createdAt]
+      properties:
+        id:
+          type: integer
+        headline:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+        worldDay:
+          type: integer
+        createdAt:
+          type: string
+
+    LoreSummary:
+      type: object
+      required: [currentAge, currentAgeDescription, currentAgeStartDay, strongestBloodline]
+      properties:
+        currentAge:
+          type: string
+        currentAgeDescription:
+          type: string
+        currentAgeStartDay:
+          type: integer
+        famousHeroName:
+          type: ["string", "null"]
+        famousHeroKingdom:
+          type: ["string", "null"]
+        famousHeroLevel:
+          type: ["integer", "null"]
+        strongestBloodline:
+          type: string
+        largestHistoricalKingdomName:
+          type: ["string", "null"]
+        latestLegendTitle:
+          type: ["string", "null"]
+        latestNewsHeadline:
+          type: ["string", "null"]

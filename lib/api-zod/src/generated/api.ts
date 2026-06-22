@@ -540,3 +540,134 @@ export const PreviewGeneticsResponse = zod.object({
 })
 
 
+/**
+ * @summary List all world ages/eras
+ */
+export const ListLoreAgesResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "startDay": zod.number(),
+  "endDay": zod.number().nullish(),
+  "description": zod.string(),
+  "trigger": zod.string(),
+  "isCurrent": zod.boolean(),
+  "createdAt": zod.string()
+})
+export const ListLoreAgesResponse = zod.array(ListLoreAgesResponseItem)
+
+
+/**
+ * @summary Get the current world age
+ */
+export const GetCurrentAgeResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "startDay": zod.number(),
+  "endDay": zod.number().nullish(),
+  "description": zod.string(),
+  "trigger": zod.string(),
+  "isCurrent": zod.boolean(),
+  "createdAt": zod.string()
+})
+
+
+/**
+ * @summary List all legends
+ */
+export const ListLegendsResponseItem = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "content": zod.string(),
+  "category": zod.string(),
+  "sourceEventId": zod.number().nullish(),
+  "relatedEntity": zod.string(),
+  "worldDay": zod.number(),
+  "createdAt": zod.string()
+})
+export const ListLegendsResponse = zod.array(ListLegendsResponseItem)
+
+
+/**
+ * @summary List all myths
+ */
+export const ListMythsResponseItem = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "content": zod.string(),
+  "subject": zod.string(),
+  "subjectName": zod.string(),
+  "worldDay": zod.number(),
+  "createdAt": zod.string()
+})
+export const ListMythsResponse = zod.array(ListMythsResponseItem)
+
+
+/**
+ * @summary List all bloodline histories
+ */
+export const ListBloodlineHistoriesResponseItem = zod.object({
+  "id": zod.number(),
+  "bloodlineName": zod.string(),
+  "ancestorName": zod.string(),
+  "totalAgeTicks": zod.number(),
+  "peakPopulation": zod.number(),
+  "content": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListBloodlineHistoriesResponse = zod.array(ListBloodlineHistoriesResponseItem)
+
+
+/**
+ * @summary List all lore books
+ */
+export const ListLoreBooksResponseItem = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "category": zod.string(),
+  "content": zod.string(),
+  "worldDay": zod.number(),
+  "createdAt": zod.string()
+})
+export const ListLoreBooksResponse = zod.array(ListLoreBooksResponseItem)
+
+
+/**
+ * @summary List recent lore news articles
+ */
+export const ListLoreNewsResponseItem = zod.object({
+  "id": zod.number(),
+  "headline": zod.string(),
+  "content": zod.string(),
+  "category": zod.string(),
+  "worldDay": zod.number(),
+  "createdAt": zod.string()
+})
+export const ListLoreNewsResponse = zod.array(ListLoreNewsResponseItem)
+
+
+/**
+ * @summary Get V7 lore summary for dashboard
+ */
+export const GetLoreSummaryResponse = zod.object({
+  "currentAge": zod.string(),
+  "currentAgeDescription": zod.string(),
+  "currentAgeStartDay": zod.number(),
+  "famousHeroName": zod.string().nullish(),
+  "famousHeroKingdom": zod.string().nullish(),
+  "famousHeroLevel": zod.number().nullish(),
+  "strongestBloodline": zod.string(),
+  "largestHistoricalKingdomName": zod.string().nullish(),
+  "latestLegendTitle": zod.string().nullish(),
+  "latestNewsHeadline": zod.string().nullish()
+})
+
+
+/**
+ * @summary Trigger lore generation from current world data
+ */
+export const GenerateLoreResponse = zod.object({
+  "success": zod.boolean(),
+  "worldDay": zod.number()
+})
+
+

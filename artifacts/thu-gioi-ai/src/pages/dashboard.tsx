@@ -1,8 +1,15 @@
 import { useEffect } from "react";
 import { useGetDashboard, useSimulationTick, getGetDashboardQueryKey } from "@workspace/api-client-react";
-import { useQueryClient } from "@tanstack/react-query";
-import { Activity, Skull, Globe2, Sparkles, AlertTriangle, Crown, Swords, Star, Shield } from "lucide-react";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { Activity, Skull, Globe2, Sparkles, AlertTriangle, Crown, Swords, Star, Shield, Clock, ScrollText } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+
+type LoreSummary = {
+  currentAge: string; currentAgeDescription: string; currentAgeStartDay: number;
+  famousHeroName: string | null; famousHeroKingdom: string | null; famousHeroLevel: number | null;
+  strongestBloodline: string; largestHistoricalKingdomName: string | null;
+  latestLegendTitle: string | null; latestNewsHeadline: string | null;
+};
 
 const EVENT_LABEL: Record<string, string> = {
   war_declared:        "chiến tranh",
@@ -43,6 +50,16 @@ export default function Dashboard() {
   const { data, isLoading } = useGetDashboard();
   const tick = useSimulationTick();
   const queryClient = useQueryClient();
+  const lore = useQuery<LoreSummary>({
+    queryKey: ["lore-summary-dashboard"],
+    queryFn: async () => {
+      const res = await fetch("/api/lore/summary");
+      if (!res.ok) throw new Error("lore fetch failed");
+      return res.json();
+    },
+    refetchInterval: 15000,
+    retry: false,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -145,6 +162,36 @@ export default function Dashboard() {
           />
         </div>
       </section>
+
+      {/* V7 — AI Lore Engine */}
+      {lore.data && (
+        <section>
+          <div className="text-[10px] font-mono text-purple-400/50 tracking-widest mb-3 border-b border-purple-400/10 pb-1">
+            V7 · AI LORE ENGINE
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="hologram-border bg-card/50 p-5 col-span-2 relative overflow-hidden">
+              <div className="text-[11px] font-mono text-muted-foreground mb-1 uppercase tracking-wide flex items-center gap-1">
+                <Clock className="w-3 h-3" /> KỶ NGUYÊN HIỆN TẠI
+              </div>
+              <div className="text-lg font-bold text-purple-400 hologram-text">{lore.data.currentAge}</div>
+              <div className="text-xs text-muted-foreground mt-1 font-mono">Bắt đầu năm {lore.data.currentAgeStartDay}</div>
+              <div className="text-xs text-foreground/60 mt-2 line-clamp-2">{lore.data.currentAgeDescription}</div>
+            </div>
+            <InfoCard title="Anh Hùng Nổi Tiếng" value={lore.data.famousHeroName ?? "—"} color="#fde047" />
+            <InfoCard title="Huyết Mạch Mạnh Nhất" value={lore.data.strongestBloodline} color="#4ade80" />
+          </div>
+          {lore.data.latestLegendTitle && (
+            <div className="mt-3 border border-purple-400/20 bg-purple-950/10 p-4 flex items-start gap-3">
+              <ScrollText className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+              <div>
+                <div className="text-[10px] font-mono text-purple-400/70 mb-1">TRUYỀN THUYẾT MỚI NHẤT</div>
+                <div className="text-sm text-foreground/90">{lore.data.latestLegendTitle}</div>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
 
       {/* Zone stats + Events */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

@@ -1,5 +1,6 @@
 import { db, creaturesTable, historyTable, worldStateTable, worldEventsTable, evolutionPathsTable } from "@workspace/db";
 import { runKingdomTick } from "./kingdom-engine";
+import { runLoreEngine } from "./lore-engine";
 import { eq, sql } from "drizzle-orm";
 
 const RANKS = [
@@ -481,6 +482,9 @@ export async function runSimulationTick() {
   await db.update(worldStateTable)
     .set({ worldDay: nextDay })
     .where(eq(worldStateTable.id, worldState.id));
+
+  // V7: Run lore engine async (non-blocking)
+  runLoreEngine(nextDay).catch(() => {});
 
   return { worldDay: nextDay, events, populations };
 }

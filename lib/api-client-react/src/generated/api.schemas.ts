@@ -287,6 +287,87 @@ export interface GeneticsPreview {
   parentBDna?: DNAProfile;
 }
 
+export interface WorldAge {
+  id: number;
+  name: string;
+  startDay: number;
+  /** @nullable */
+  endDay?: number | null;
+  description: string;
+  trigger: string;
+  isCurrent: boolean;
+  createdAt: string;
+}
+
+export interface Legend {
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+  /** @nullable */
+  sourceEventId?: number | null;
+  relatedEntity: string;
+  worldDay: number;
+  createdAt: string;
+}
+
+export interface Myth {
+  id: number;
+  title: string;
+  content: string;
+  subject: string;
+  subjectName: string;
+  worldDay: number;
+  createdAt: string;
+}
+
+export interface BloodlineHistory {
+  id: number;
+  bloodlineName: string;
+  ancestorName: string;
+  totalAgeTicks: number;
+  peakPopulation: number;
+  content: string;
+  createdAt: string;
+}
+
+export interface LoreBook {
+  id: number;
+  title: string;
+  category: string;
+  content: string;
+  worldDay: number;
+  createdAt: string;
+}
+
+export interface LoreNews {
+  id: number;
+  headline: string;
+  content: string;
+  category: string;
+  worldDay: number;
+  createdAt: string;
+}
+
+export interface LoreSummary {
+  currentAge: string;
+  currentAgeDescription: string;
+  currentAgeStartDay: number;
+  /** @nullable */
+  famousHeroName?: string | null;
+  /** @nullable */
+  famousHeroKingdom?: string | null;
+  /** @nullable */
+  famousHeroLevel?: number | null;
+  strongestBloodline: string;
+  /** @nullable */
+  largestHistoricalKingdomName?: string | null;
+  /** @nullable */
+  latestLegendTitle?: string | null;
+  /** @nullable */
+  latestNewsHeadline?: string | null;
+}
+
 export type ListCreaturesParams = {
 zone?: string;
 element?: string;
@@ -296,5 +377,10 @@ status?: string;
 export type ListHistoryParams = {
 limit?: number;
 offset?: number;
+};
+
+export type GenerateLore200 = {
+  success: boolean;
+  worldDay: number;
 };
 

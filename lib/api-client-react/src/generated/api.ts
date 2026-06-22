@@ -22,22 +22,30 @@ import type {
 import type {
   BeastKingdom,
   BeastKingdomDetail,
+  BloodlineHistory,
   BreedingInput,
   BreedingResult,
   Creature,
   DashboardSummary,
   EvolutionPath,
+  GenerateLore200,
   GeneticsPreview,
   HealthStatus,
   Hero,
   HistoryEntry,
   KingdomRelation,
+  Legend,
   ListCreaturesParams,
   ListHistoryParams,
+  LoreBook,
+  LoreNews,
+  LoreSummary,
+  Myth,
   Pack,
   Territory,
   TickResult,
   War,
+  WorldAge,
   Zone,
   ZoneDetail
 } from './api.schemas';
@@ -1433,5 +1441,691 @@ export const usePreviewGenetics = <TError = ErrorType<void>,
         TContext
       > => {
       return useMutation(getPreviewGeneticsMutationOptions(options));
+    }
+
+export const getListLoreAgesUrl = () => {
+
+
+
+
+  return `/api/lore/ages`
+}
+
+/**
+ * @summary List all world ages/eras
+ */
+export const listLoreAges = async ( options?: RequestInit): Promise<WorldAge[]> => {
+
+  return customFetch<WorldAge[]>(getListLoreAgesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLoreAgesQueryKey = () => {
+    return [
+    `/api/lore/ages`
+    ] as const;
+    }
+
+
+export const getListLoreAgesQueryOptions = <TData = Awaited<ReturnType<typeof listLoreAges>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLoreAges>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLoreAgesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLoreAges>>> = ({ signal }) => listLoreAges({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLoreAges>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLoreAgesQueryResult = NonNullable<Awaited<ReturnType<typeof listLoreAges>>>
+export type ListLoreAgesQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all world ages/eras
+ */
+
+export function useListLoreAges<TData = Awaited<ReturnType<typeof listLoreAges>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLoreAges>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLoreAgesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetCurrentAgeUrl = () => {
+
+
+
+
+  return `/api/lore/current-age`
+}
+
+/**
+ * @summary Get the current world age
+ */
+export const getCurrentAge = async ( options?: RequestInit): Promise<WorldAge> => {
+
+  return customFetch<WorldAge>(getGetCurrentAgeUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetCurrentAgeQueryKey = () => {
+    return [
+    `/api/lore/current-age`
+    ] as const;
+    }
+
+
+export const getGetCurrentAgeQueryOptions = <TData = Awaited<ReturnType<typeof getCurrentAge>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getCurrentAge>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetCurrentAgeQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCurrentAge>>> = ({ signal }) => getCurrentAge({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCurrentAge>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetCurrentAgeQueryResult = NonNullable<Awaited<ReturnType<typeof getCurrentAge>>>
+export type GetCurrentAgeQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get the current world age
+ */
+
+export function useGetCurrentAge<TData = Awaited<ReturnType<typeof getCurrentAge>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getCurrentAge>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetCurrentAgeQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListLegendsUrl = () => {
+
+
+
+
+  return `/api/lore/legends`
+}
+
+/**
+ * @summary List all legends
+ */
+export const listLegends = async ( options?: RequestInit): Promise<Legend[]> => {
+
+  return customFetch<Legend[]>(getListLegendsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLegendsQueryKey = () => {
+    return [
+    `/api/lore/legends`
+    ] as const;
+    }
+
+
+export const getListLegendsQueryOptions = <TData = Awaited<ReturnType<typeof listLegends>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLegends>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLegendsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLegends>>> = ({ signal }) => listLegends({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLegends>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLegendsQueryResult = NonNullable<Awaited<ReturnType<typeof listLegends>>>
+export type ListLegendsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all legends
+ */
+
+export function useListLegends<TData = Awaited<ReturnType<typeof listLegends>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLegends>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLegendsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListMythsUrl = () => {
+
+
+
+
+  return `/api/lore/myths`
+}
+
+/**
+ * @summary List all myths
+ */
+export const listMyths = async ( options?: RequestInit): Promise<Myth[]> => {
+
+  return customFetch<Myth[]>(getListMythsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListMythsQueryKey = () => {
+    return [
+    `/api/lore/myths`
+    ] as const;
+    }
+
+
+export const getListMythsQueryOptions = <TData = Awaited<ReturnType<typeof listMyths>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listMyths>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListMythsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listMyths>>> = ({ signal }) => listMyths({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listMyths>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListMythsQueryResult = NonNullable<Awaited<ReturnType<typeof listMyths>>>
+export type ListMythsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all myths
+ */
+
+export function useListMyths<TData = Awaited<ReturnType<typeof listMyths>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listMyths>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListMythsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListBloodlineHistoriesUrl = () => {
+
+
+
+
+  return `/api/lore/bloodlines`
+}
+
+/**
+ * @summary List all bloodline histories
+ */
+export const listBloodlineHistories = async ( options?: RequestInit): Promise<BloodlineHistory[]> => {
+
+  return customFetch<BloodlineHistory[]>(getListBloodlineHistoriesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListBloodlineHistoriesQueryKey = () => {
+    return [
+    `/api/lore/bloodlines`
+    ] as const;
+    }
+
+
+export const getListBloodlineHistoriesQueryOptions = <TData = Awaited<ReturnType<typeof listBloodlineHistories>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listBloodlineHistories>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListBloodlineHistoriesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listBloodlineHistories>>> = ({ signal }) => listBloodlineHistories({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listBloodlineHistories>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListBloodlineHistoriesQueryResult = NonNullable<Awaited<ReturnType<typeof listBloodlineHistories>>>
+export type ListBloodlineHistoriesQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all bloodline histories
+ */
+
+export function useListBloodlineHistories<TData = Awaited<ReturnType<typeof listBloodlineHistories>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listBloodlineHistories>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListBloodlineHistoriesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListLoreBooksUrl = () => {
+
+
+
+
+  return `/api/lore/books`
+}
+
+/**
+ * @summary List all lore books
+ */
+export const listLoreBooks = async ( options?: RequestInit): Promise<LoreBook[]> => {
+
+  return customFetch<LoreBook[]>(getListLoreBooksUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLoreBooksQueryKey = () => {
+    return [
+    `/api/lore/books`
+    ] as const;
+    }
+
+
+export const getListLoreBooksQueryOptions = <TData = Awaited<ReturnType<typeof listLoreBooks>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLoreBooks>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLoreBooksQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLoreBooks>>> = ({ signal }) => listLoreBooks({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLoreBooks>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLoreBooksQueryResult = NonNullable<Awaited<ReturnType<typeof listLoreBooks>>>
+export type ListLoreBooksQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all lore books
+ */
+
+export function useListLoreBooks<TData = Awaited<ReturnType<typeof listLoreBooks>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLoreBooks>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLoreBooksQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListLoreNewsUrl = () => {
+
+
+
+
+  return `/api/lore/news`
+}
+
+/**
+ * @summary List recent lore news articles
+ */
+export const listLoreNews = async ( options?: RequestInit): Promise<LoreNews[]> => {
+
+  return customFetch<LoreNews[]>(getListLoreNewsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLoreNewsQueryKey = () => {
+    return [
+    `/api/lore/news`
+    ] as const;
+    }
+
+
+export const getListLoreNewsQueryOptions = <TData = Awaited<ReturnType<typeof listLoreNews>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLoreNews>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLoreNewsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLoreNews>>> = ({ signal }) => listLoreNews({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLoreNews>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLoreNewsQueryResult = NonNullable<Awaited<ReturnType<typeof listLoreNews>>>
+export type ListLoreNewsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List recent lore news articles
+ */
+
+export function useListLoreNews<TData = Awaited<ReturnType<typeof listLoreNews>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLoreNews>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLoreNewsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetLoreSummaryUrl = () => {
+
+
+
+
+  return `/api/lore/summary`
+}
+
+/**
+ * @summary Get V7 lore summary for dashboard
+ */
+export const getLoreSummary = async ( options?: RequestInit): Promise<LoreSummary> => {
+
+  return customFetch<LoreSummary>(getGetLoreSummaryUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetLoreSummaryQueryKey = () => {
+    return [
+    `/api/lore/summary`
+    ] as const;
+    }
+
+
+export const getGetLoreSummaryQueryOptions = <TData = Awaited<ReturnType<typeof getLoreSummary>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLoreSummary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetLoreSummaryQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLoreSummary>>> = ({ signal }) => getLoreSummary({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLoreSummary>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetLoreSummaryQueryResult = NonNullable<Awaited<ReturnType<typeof getLoreSummary>>>
+export type GetLoreSummaryQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get V7 lore summary for dashboard
+ */
+
+export function useGetLoreSummary<TData = Awaited<ReturnType<typeof getLoreSummary>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLoreSummary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetLoreSummaryQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGenerateLoreUrl = () => {
+
+
+
+
+  return `/api/lore/generate`
+}
+
+/**
+ * @summary Trigger lore generation from current world data
+ */
+export const generateLore = async ( options?: RequestInit): Promise<GenerateLore200> => {
+
+  return customFetch<GenerateLore200>(getGenerateLoreUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+export const getGenerateLoreMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generateLore>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof generateLore>>, TError,void, TContext> => {
+
+const mutationKey = ['generateLore'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof generateLore>>, void> = () => {
+
+
+          return  generateLore(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type GenerateLoreMutationResult = NonNullable<Awaited<ReturnType<typeof generateLore>>>
+
+    export type GenerateLoreMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Trigger lore generation from current world data
+ */
+export const useGenerateLore = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generateLore>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof generateLore>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getGenerateLoreMutationOptions(options));
     }
 
