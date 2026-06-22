@@ -48,7 +48,11 @@ export const GetDashboardResponse = zod.object({
   "totalKingdoms": zod.number().nullish(),
   "strongestKingdomName": zod.string().nullish(),
   "richestKingdomName": zod.string().nullish(),
-  "largestKingdomName": zod.string().nullish()
+  "largestKingdomName": zod.string().nullish(),
+  "activeWarsCount": zod.number().nullish(),
+  "mostAggressiveKingdom": zod.string().nullish(),
+  "totalTerritoriesConquered": zod.number().nullish(),
+  "activeHeroesCount": zod.number().nullish()
 })
 
 
@@ -319,13 +323,17 @@ export const ListKingdomsResponseItem = zod.object({
   "population": zod.number(),
   "territoryCount": zod.number(),
   "status": zod.string(),
+  "technologyLevel": zod.number(),
+  "morale": zod.number(),
+  "warCount": zod.number(),
+  "warWins": zod.number(),
   "createdAt": zod.string()
 })
 export const ListKingdomsResponse = zod.array(ListKingdomsResponseItem)
 
 
 /**
- * @summary Get kingdom detail with packs, territories, and relations
+ * @summary Get kingdom detail with packs, territories, relations, wars and heroes
  */
 export const GetKingdomParams = zod.object({
   "id": zod.coerce.number()
@@ -343,6 +351,10 @@ export const GetKingdomResponse = zod.object({
   "population": zod.number(),
   "territoryCount": zod.number(),
   "status": zod.string(),
+  "technologyLevel": zod.number(),
+  "morale": zod.number(),
+  "warCount": zod.number(),
+  "warWins": zod.number(),
   "createdAt": zod.string()
 }).and(zod.object({
   "packs": zod.array(zod.object({
@@ -382,6 +394,31 @@ export const GetKingdomResponse = zod.object({
   "relation": zod.string(),
   "sinceDay": zod.number(),
   "createdAt": zod.string()
+})).optional(),
+  "wars": zod.array(zod.object({
+  "id": zod.number(),
+  "attackerKingdom": zod.string(),
+  "defenderKingdom": zod.string(),
+  "status": zod.string(),
+  "startDay": zod.number(),
+  "endDay": zod.number().nullish(),
+  "territoryWon": zod.string().nullish(),
+  "attackerCasualties": zod.number(),
+  "defenderCasualties": zod.number(),
+  "resultDescription": zod.string(),
+  "createdAt": zod.string()
+})).optional(),
+  "heroes": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "kingdomName": zod.string(),
+  "level": zod.number(),
+  "ability": zod.string(),
+  "militaryBonus": zod.number(),
+  "moraleBonus": zod.number(),
+  "status": zod.string(),
+  "bornDay": zod.number(),
+  "createdAt": zod.string()
 })).optional()
 }))
 
@@ -417,6 +454,43 @@ export const ListKingdomRelationsResponseItem = zod.object({
   "createdAt": zod.string()
 })
 export const ListKingdomRelationsResponse = zod.array(ListKingdomRelationsResponseItem)
+
+
+/**
+ * @summary List all wars (ongoing and historical)
+ */
+export const ListWarsResponseItem = zod.object({
+  "id": zod.number(),
+  "attackerKingdom": zod.string(),
+  "defenderKingdom": zod.string(),
+  "status": zod.string(),
+  "startDay": zod.number(),
+  "endDay": zod.number().nullish(),
+  "territoryWon": zod.string().nullish(),
+  "attackerCasualties": zod.number(),
+  "defenderCasualties": zod.number(),
+  "resultDescription": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListWarsResponse = zod.array(ListWarsResponseItem)
+
+
+/**
+ * @summary List all heroes
+ */
+export const ListHeroesResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "kingdomName": zod.string(),
+  "level": zod.number(),
+  "ability": zod.string(),
+  "militaryBonus": zod.number(),
+  "moraleBonus": zod.number(),
+  "status": zod.string(),
+  "bornDay": zod.number(),
+  "createdAt": zod.string()
+})
+export const ListHeroesResponse = zod.array(ListHeroesResponseItem)
 
 
 /**

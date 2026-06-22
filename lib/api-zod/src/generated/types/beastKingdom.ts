@@ -18,5 +18,9 @@ export interface BeastKingdom {
   population: number;
   territoryCount: number;
   status: string;
+  technologyLevel: number;
+  morale: number;
+  warCount: number;
+  warWins: number;
   createdAt: string;
 }

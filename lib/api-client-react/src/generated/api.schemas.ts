@@ -126,6 +126,14 @@ export interface DashboardSummary {
   richestKingdomName?: string | null;
   /** @nullable */
   largestKingdomName?: string | null;
+  /** @nullable */
+  activeWarsCount?: number | null;
+  /** @nullable */
+  mostAggressiveKingdom?: string | null;
+  /** @nullable */
+  totalTerritoriesConquered?: number | null;
+  /** @nullable */
+  activeHeroesCount?: number | null;
 }
 
 export interface CreaturePopulation {
@@ -187,6 +195,10 @@ export interface BeastKingdom {
   population: number;
   territoryCount: number;
   status: string;
+  technologyLevel: number;
+  morale: number;
+  warCount: number;
+  warWins: number;
   createdAt: string;
 }
 
@@ -214,10 +226,41 @@ export interface KingdomRelation {
   createdAt: string;
 }
 
+export interface War {
+  id: number;
+  attackerKingdom: string;
+  defenderKingdom: string;
+  status: string;
+  startDay: number;
+  /** @nullable */
+  endDay?: number | null;
+  /** @nullable */
+  territoryWon?: string | null;
+  attackerCasualties: number;
+  defenderCasualties: number;
+  resultDescription: string;
+  createdAt: string;
+}
+
+export interface Hero {
+  id: number;
+  name: string;
+  kingdomName: string;
+  level: number;
+  ability: string;
+  militaryBonus: number;
+  moraleBonus: number;
+  status: string;
+  bornDay: number;
+  createdAt: string;
+}
+
 export type BeastKingdomDetail = BeastKingdom & {
   packs?: Pack[];
   territories?: Territory[];
   relations?: KingdomRelation[];
+  wars?: War[];
+  heroes?: Hero[];
 };
 
 export interface DNAProfile {

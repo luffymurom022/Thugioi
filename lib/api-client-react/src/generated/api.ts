@@ -29,6 +29,7 @@ import type {
   EvolutionPath,
   GeneticsPreview,
   HealthStatus,
+  Hero,
   HistoryEntry,
   KingdomRelation,
   ListCreaturesParams,
@@ -36,6 +37,7 @@ import type {
   Pack,
   Territory,
   TickResult,
+  War,
   Zone,
   ZoneDetail
 } from './api.schemas';
@@ -986,7 +988,7 @@ export const getGetKingdomUrl = (id: number,) => {
 }
 
 /**
- * @summary Get kingdom detail with packs, territories, and relations
+ * @summary Get kingdom detail with packs, territories, relations, wars and heroes
  */
 export const getKingdom = async (id: number, options?: RequestInit): Promise<BeastKingdomDetail> => {
 
@@ -1033,7 +1035,7 @@ export type GetKingdomQueryError = ErrorType<void>
 
 
 /**
- * @summary Get kingdom detail with packs, territories, and relations
+ * @summary Get kingdom detail with packs, territories, relations, wars and heroes
  */
 
 export function useGetKingdom<TData = Awaited<ReturnType<typeof getKingdom>>, TError = ErrorType<void>>(
@@ -1196,6 +1198,160 @@ export function useListKingdomRelations<TData = Awaited<ReturnType<typeof listKi
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getListKingdomRelationsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListWarsUrl = () => {
+
+
+
+
+  return `/api/wars`
+}
+
+/**
+ * @summary List all wars (ongoing and historical)
+ */
+export const listWars = async ( options?: RequestInit): Promise<War[]> => {
+
+  return customFetch<War[]>(getListWarsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListWarsQueryKey = () => {
+    return [
+    `/api/wars`
+    ] as const;
+    }
+
+
+export const getListWarsQueryOptions = <TData = Awaited<ReturnType<typeof listWars>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listWars>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListWarsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listWars>>> = ({ signal }) => listWars({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listWars>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListWarsQueryResult = NonNullable<Awaited<ReturnType<typeof listWars>>>
+export type ListWarsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all wars (ongoing and historical)
+ */
+
+export function useListWars<TData = Awaited<ReturnType<typeof listWars>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listWars>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListWarsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getListHeroesUrl = () => {
+
+
+
+
+  return `/api/heroes`
+}
+
+/**
+ * @summary List all heroes
+ */
+export const listHeroes = async ( options?: RequestInit): Promise<Hero[]> => {
+
+  return customFetch<Hero[]>(getListHeroesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListHeroesQueryKey = () => {
+    return [
+    `/api/heroes`
+    ] as const;
+    }
+
+
+export const getListHeroesQueryOptions = <TData = Awaited<ReturnType<typeof listHeroes>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listHeroes>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListHeroesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listHeroes>>> = ({ signal }) => listHeroes({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listHeroes>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListHeroesQueryResult = NonNullable<Awaited<ReturnType<typeof listHeroes>>>
+export type ListHeroesQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all heroes
+ */
+
+export function useListHeroes<TData = Awaited<ReturnType<typeof listHeroes>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listHeroes>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListHeroesQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

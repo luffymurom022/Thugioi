@@ -34,6 +34,11 @@ export const beastKingdomsTable = pgTable("beast_kingdoms", {
   population: integer("population").notNull().default(0),
   territoryCount: integer("territory_count").notNull().default(1),
   status: text("status").notNull().default("active"),
+  // V6 additions
+  technologyLevel: integer("technology_level").notNull().default(1),
+  morale: integer("morale").notNull().default(70),
+  warCount: integer("war_count").notNull().default(0),
+  warWins: integer("war_wins").notNull().default(0),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -62,12 +67,45 @@ export const kingdomRelationsTable = pgTable("kingdom_relations", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Wars — V6 War & Conquest System
+export const warsTable = pgTable("wars", {
+  id: serial("id").primaryKey(),
+  attackerKingdom: text("attacker_kingdom").notNull(),
+  defenderKingdom: text("defender_kingdom").notNull(),
+  status: text("status").notNull().default("ongoing"), // ongoing | attacker_won | defender_won | ceasefire
+  startDay: integer("start_day").notNull(),
+  endDay: integer("end_day"),
+  territoryWon: text("territory_won"),
+  attackerCasualties: integer("attacker_casualties").notNull().default(0),
+  defenderCasualties: integer("defender_casualties").notNull().default(0),
+  resultDescription: text("result_description").notNull().default(""),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+// Heroes — V6 Hero System
+export const heroesTable = pgTable("heroes", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  kingdomName: text("kingdom_name").notNull(),
+  level: integer("level").notNull().default(1),
+  ability: text("ability").notNull().default(""),
+  militaryBonus: integer("military_bonus").notNull().default(10),
+  moraleBonus: integer("morale_bonus").notNull().default(5),
+  status: text("status").notNull().default("active"), // active | fallen
+  bornDay: integer("born_day").notNull().default(1),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const insertTerritorySchema = createInsertSchema(territoriesTable).omit({ id: true, createdAt: true });
 export const insertKingdomSchema = createInsertSchema(beastKingdomsTable).omit({ id: true, createdAt: true });
 export const insertPackSchema = createInsertSchema(packsTable).omit({ id: true, createdAt: true });
 export const insertRelationSchema = createInsertSchema(kingdomRelationsTable).omit({ id: true, createdAt: true });
+export const insertWarSchema = createInsertSchema(warsTable).omit({ id: true, createdAt: true });
+export const insertHeroSchema = createInsertSchema(heroesTable).omit({ id: true, createdAt: true });
 
 export type Territory = typeof territoriesTable.$inferSelect;
 export type BeastKingdom = typeof beastKingdomsTable.$inferSelect;
 export type Pack = typeof packsTable.$inferSelect;
 export type KingdomRelation = typeof kingdomRelationsTable.$inferSelect;
+export type War = typeof warsTable.$inferSelect;
+export type Hero = typeof heroesTable.$inferSelect;

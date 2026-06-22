@@ -36,4 +36,12 @@ export interface DashboardSummary {
   richestKingdomName?: string | null;
   /** @nullable */
   largestKingdomName?: string | null;
+  /** @nullable */
+  activeWarsCount?: number | null;
+  /** @nullable */
+  mostAggressiveKingdom?: string | null;
+  /** @nullable */
+  totalTerritoriesConquered?: number | null;
+  /** @nullable */
+  activeHeroesCount?: number | null;
 }

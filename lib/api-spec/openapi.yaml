@@ -17,6 +17,8 @@ tags:
   - name: genetics
   - name: kingdoms
   - name: territories
+  - name: wars
+  - name: heroes
 paths:
   /healthz:
     get:
@@ -238,7 +240,7 @@ paths:
     get:
       operationId: getKingdom
       tags: [kingdoms]
-      summary: Get kingdom detail with packs, territories, and relations
+      summary: Get kingdom detail with packs, territories, relations, wars and heroes
       parameters:
         - name: id
           in: path
@@ -284,6 +286,36 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/KingdomRelation"
+
+  /wars:
+    get:
+      operationId: listWars
+      tags: [wars]
+      summary: List all wars (ongoing and historical)
+      responses:
+        "200":
+          description: War list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/War"
+
+  /heroes:
+    get:
+      operationId: listHeroes
+      tags: [heroes]
+      summary: List all heroes
+      responses:
+        "200":
+          description: Hero list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Hero"
 
   /genetics/preview:
     post:
@@ -511,6 +543,14 @@ components:
           type: ["string", "null"]
         largestKingdomName:
           type: ["string", "null"]
+        activeWarsCount:
+          type: ["integer", "null"]
+        mostAggressiveKingdom:
+          type: ["string", "null"]
+        totalTerritoriesConquered:
+          type: ["integer", "null"]
+        activeHeroesCount:
+          type: ["integer", "null"]
 
     ZoneStat:
       type: object
@@ -619,7 +659,7 @@ components:
 
     BeastKingdom:
       type: object
-      required: [id, name, dominantSpecies, foundedDay, capital, militaryPower, economy, influence, population, territoryCount, status, createdAt]
+      required: [id, name, dominantSpecies, foundedDay, capital, militaryPower, economy, influence, population, territoryCount, status, technologyLevel, morale, warCount, warWins, createdAt]
       properties:
         id:
           type: integer
@@ -643,6 +683,14 @@ components:
           type: integer
         status:
           type: string
+        technologyLevel:
+          type: integer
+        morale:
+          type: integer
+        warCount:
+          type: integer
+        warWins:
+          type: integer
         createdAt:
           type: string
 
@@ -663,6 +711,14 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/KingdomRelation"
+            wars:
+              type: array
+              items:
+                $ref: "#/components/schemas/War"
+            heroes:
+              type: array
+              items:
+                $ref: "#/components/schemas/Hero"
 
     Pack:
       type: object
@@ -704,6 +760,58 @@ components:
         relation:
           type: string
         sinceDay:
+          type: integer
+        createdAt:
+          type: string
+
+    War:
+      type: object
+      required: [id, attackerKingdom, defenderKingdom, status, startDay, resultDescription, attackerCasualties, defenderCasualties, createdAt]
+      properties:
+        id:
+          type: integer
+        attackerKingdom:
+          type: string
+        defenderKingdom:
+          type: string
+        status:
+          type: string
+        startDay:
+          type: integer
+        endDay:
+          type: ["integer", "null"]
+        territoryWon:
+          type: ["string", "null"]
+        attackerCasualties:
+          type: integer
+        defenderCasualties:
+          type: integer
+        resultDescription:
+          type: string
+        createdAt:
+          type: string
+
+    Hero:
+      type: object
+      required: [id, name, kingdomName, level, ability, militaryBonus, moraleBonus, status, bornDay, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        kingdomName:
+          type: string
+        level:
+          type: integer
+        ability:
+          type: string
+        militaryBonus:
+          type: integer
+        moraleBonus:
+          type: integer
+        status:
+          type: string
+        bornDay:
           type: integer
         createdAt:
           type: string

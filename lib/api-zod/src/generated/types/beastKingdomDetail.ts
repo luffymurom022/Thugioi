@@ -6,12 +6,16 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { BeastKingdom } from './beastKingdom';
+import type { Hero } from './hero';
 import type { KingdomRelation } from './kingdomRelation';
 import type { Pack } from './pack';
 import type { Territory } from './territory';
+import type { War } from './war';
 
 export type BeastKingdomDetail = BeastKingdom & {
   packs?: Pack[];
   territories?: Territory[];
   relations?: KingdomRelation[];
+  wars?: War[];
+  heroes?: Hero[];
 };

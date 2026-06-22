@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
-import { eq, desc } from "drizzle-orm";
-import { db, territoriesTable, beastKingdomsTable, packsTable, kingdomRelationsTable, historyTable } from "@workspace/db";
+import { eq, desc, or, and } from "drizzle-orm";
+import { db, territoriesTable, beastKingdomsTable, packsTable, kingdomRelationsTable, historyTable, warsTable, heroesTable } from "@workspace/db";
 import { seedTerritories } from "../lib/kingdom-engine";
 
 const router: IRouter = Router();
@@ -13,16 +13,14 @@ router.get("/territories", async (_req, res): Promise<void> => {
 });
 
 router.get("/territories/:zoneName", async (req, res): Promise<void> => {
-  const [t] = await db.select().from(territoriesTable)
-    .where(eq(territoriesTable.zoneName, req.params.zoneName));
+  const [t] = await db.select().from(territoriesTable).where(eq(territoriesTable.zoneName, req.params.zoneName));
   if (!t) { res.status(404).json({ error: "Territory not found" }); return; }
   res.json({ ...t, createdAt: t.createdAt.toISOString() });
 });
 
 // Beast Kingdoms
 router.get("/kingdoms", async (_req, res): Promise<void> => {
-  const kingdoms = await db.select().from(beastKingdomsTable)
-    .orderBy(desc(beastKingdomsTable.influence));
+  const kingdoms = await db.select().from(beastKingdomsTable).orderBy(desc(beastKingdomsTable.influence));
   res.json(kingdoms.map(k => ({ ...k, createdAt: k.createdAt.toISOString() })));
 });
 
@@ -30,36 +28,45 @@ router.get("/kingdoms/:id", async (req, res): Promise<void> => {
   const id = parseInt(req.params.id);
   const [kingdom] = await db.select().from(beastKingdomsTable).where(eq(beastKingdomsTable.id, id));
   if (!kingdom) { res.status(404).json({ error: "Kingdom not found" }); return; }
-
-  const packs = await db.select().from(packsTable).where(eq(packsTable.kingdomName, kingdom.name));
-  const territories = await db.select().from(territoriesTable)
-    .where(eq(territoriesTable.controllingKingdom, kingdom.name));
-  const relations = await db.select().from(kingdomRelationsTable).where(
-    eq(kingdomRelationsTable.kingdomNameA, kingdom.name)
+  const packs       = await db.select().from(packsTable).where(eq(packsTable.kingdomName, kingdom.name));
+  const territories = await db.select().from(territoriesTable).where(eq(territoriesTable.controllingKingdom, kingdom.name));
+  const relations   = await db.select().from(kingdomRelationsTable).where(eq(kingdomRelationsTable.kingdomNameA, kingdom.name));
+  const wars        = await db.select().from(warsTable).where(
+    or(eq(warsTable.attackerKingdom, kingdom.name), eq(warsTable.defenderKingdom, kingdom.name))
   );
-
+  const heroes      = await db.select().from(heroesTable).where(eq(heroesTable.kingdomName, kingdom.name));
   res.json({
-    ...kingdom,
-    createdAt: kingdom.createdAt.toISOString(),
-    packs: packs.map(p => ({ ...p, createdAt: p.createdAt.toISOString() })),
+    ...kingdom, createdAt: kingdom.createdAt.toISOString(),
+    packs:       packs.map(p => ({ ...p, createdAt: p.createdAt.toISOString() })),
     territories: territories.map(t => ({ ...t, createdAt: t.createdAt.toISOString() })),
-    relations: relations.map(r => ({ ...r, createdAt: r.createdAt.toISOString() })),
+    relations:   relations.map(r => ({ ...r, createdAt: r.createdAt.toISOString() })),
+    wars:        wars.map(w => ({ ...w, createdAt: w.createdAt.toISOString() })),
+    heroes:      heroes.map(h => ({ ...h, createdAt: h.createdAt.toISOString() })),
   });
 });
 
 // Packs
 router.get("/packs", async (_req, res): Promise<void> => {
-  const packs = await db.select().from(packsTable)
-    .where(eq(packsTable.status, "active"))
-    .orderBy(desc(packsTable.population));
+  const packs = await db.select().from(packsTable).where(eq(packsTable.status, "active")).orderBy(desc(packsTable.population));
   res.json(packs.map(p => ({ ...p, createdAt: p.createdAt.toISOString() })));
 });
 
 // Kingdom relations
 router.get("/kingdom-relations", async (_req, res): Promise<void> => {
-  const relations = await db.select().from(kingdomRelationsTable)
-    .orderBy(desc(kingdomRelationsTable.sinceDay));
+  const relations = await db.select().from(kingdomRelationsTable).orderBy(desc(kingdomRelationsTable.sinceDay));
   res.json(relations.map(r => ({ ...r, createdAt: r.createdAt.toISOString() })));
+});
+
+// Wars — V6
+router.get("/wars", async (_req, res): Promise<void> => {
+  const wars = await db.select().from(warsTable).orderBy(desc(warsTable.startDay));
+  res.json(wars.map(w => ({ ...w, createdAt: w.createdAt.toISOString() })));
+});
+
+// Heroes — V6
+router.get("/heroes", async (_req, res): Promise<void> => {
+  const heroes = await db.select().from(heroesTable).orderBy(desc(heroesTable.level));
+  res.json(heroes.map(h => ({ ...h, createdAt: h.createdAt.toISOString() })));
 });
 
 export default router;
