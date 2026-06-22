@@ -24,8 +24,11 @@ function ResourceMiniBar({ label, value, max, color }: { label: string; value: n
 }
 
 export default function MapPage() {
-  const { data: zones, isLoading } = useListZones();
-  const { data: territories } = useListTerritories();
+  const { data: zonesRaw, isLoading } = useListZones();
+  const { data: territoriesRaw } = useListTerritories();
+
+  const zones = Array.isArray(zonesRaw) ? zonesRaw : [];
+  const territories = Array.isArray(territoriesRaw) ? territoriesRaw : [];
 
   if (isLoading) {
     return (
@@ -34,8 +37,6 @@ export default function MapPage() {
       </div>
     );
   }
-
-  if (!zones) return null;
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
