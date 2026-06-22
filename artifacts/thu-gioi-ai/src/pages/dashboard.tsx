@@ -70,7 +70,7 @@ export default function Dashboard() {
             Trạng Thái Khu Vực
           </h2>
           <div className="space-y-4 flex-1">
-            {data.zoneStats.map((zone) => (
+            {(data.zoneStats ?? []).map((zone) => (
               <div key={zone.zoneId} className="border border-primary/10 bg-black/40 p-4 relative overflow-hidden group hover:border-primary/40 transition-colors">
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">{zone.zoneName}</span>
@@ -100,14 +100,14 @@ export default function Dashboard() {
             Sự Kiện Gần Đây
           </h2>
           <div className="space-y-3 flex-1 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
-            {data.recentEvents.map((event) => (
+            {(data.recentEvents ?? []).map((event) => (
               <div key={event.id} className="border-l-2 border-primary/40 pl-4 py-2 relative">
                 <div className="absolute w-2 h-2 rounded-full bg-primary -left-[5px] top-3" />
                 <div className="text-xs text-primary/70 font-mono mb-1">DAY {event.worldDay} // {event.eventType}</div>
                 <div className="text-sm text-foreground/90">{event.description}</div>
               </div>
             ))}
-            {data.recentEvents.length === 0 && (
+            {(data.recentEvents ?? []).length === 0 && (
               <div className="text-center text-muted-foreground font-mono py-8">NO RECENT EVENTS</div>
             )}
           </div>
