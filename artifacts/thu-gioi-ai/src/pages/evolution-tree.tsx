@@ -68,7 +68,7 @@ function SpeciesNode({ data }: { data: {
       <div className="px-3 py-1.5 border-b" style={{ borderColor: `${clr.border}40`, background: `${clr.border}15` }}>
         <div className="flex items-center justify-between gap-1">
           <span className="text-[10px] font-mono" style={{ color: clr.border }}>
-            RANK {data.rankLevel}
+            BẬC {data.rankLevel}
           </span>
           {data.isMutant && (
             <span className="text-[9px] px-1 border rounded font-bold text-fuchsia-300 border-fuchsia-500/50 bg-fuchsia-900/40">

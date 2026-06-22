@@ -212,9 +212,15 @@ export interface ChildDNAResult {
 }
 
 const RANKS = [
-  "Động Vật", "Dã Thú", "Hoang Thú", "Linh Thú", "Hoàng Thú",
-  "Vương Thú", "Tôn Thú", "Đế Thú", "Thánh Thú", "Thần Thú",
-  "Tiên Thú", "Tổ Thú", "Sáng Thần Thú",
+  "Dã Thú",    // 1
+  "Linh Thú",  // 2
+  "Vương Thú", // 3
+  "Hoàng Thú", // 4
+  "Đế Thú",    // 5
+  "Thánh Thú", // 6
+  "Thần Thú",  // 7
+  "Tiên Thú",  // 8
+  "Tổ Thú",    // 9
 ];
 
 function bloodlineToRankBonus(bl: Bloodline): number {

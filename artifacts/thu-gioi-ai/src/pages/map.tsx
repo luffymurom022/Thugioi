@@ -139,7 +139,7 @@ export default function MapPage() {
               </div>
 
               <div className="p-3 bg-black/40 border-t border-primary/10 text-center text-[10px] font-mono text-primary/40 tracking-widest">
-                ZONE_ID // {zone.id.toString().padStart(4, "0")} · {climate.toUpperCase()}
+                KHU VỰC // {zone.id.toString().padStart(4, "0")} · {climate.toUpperCase()}
               </div>
             </div>
           );

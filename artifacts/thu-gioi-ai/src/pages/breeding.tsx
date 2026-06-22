@@ -24,7 +24,7 @@ export default function BreedingPage() {
       onSuccess: (data) => {
         setResult(data);
         toast({
-          title: "BREEDING SUCCESS",
+          title: "LAI TẠO THÀNH CÔNG",
           description: data.message,
           className: "bg-green-500/20 border-green-500/50 text-green-400 font-mono",
         });
@@ -32,8 +32,8 @@ export default function BreedingPage() {
       onError: (err: any) => {
         toast({
           variant: "destructive",
-          title: "GENETIC INCOMPATIBILITY",
-          description: err.message || "Failed to breed species.",
+          title: "KHÔNG TƯƠNG THÍCH",
+          description: err.message || "Không thể lai tạo hai loài này.",
           className: "font-mono"
         });
       }
@@ -50,16 +50,16 @@ export default function BreedingPage() {
       <header className="text-center border-b border-primary/20 pb-8">
         <Dna className="w-12 h-12 text-secondary mx-auto mb-4 animate-pulse-glow" />
         <h1 className="text-4xl font-bold tracking-widest text-foreground uppercase hologram-text mb-2">Phòng Thí Nghiệm Lai Tạo</h1>
-        <p className="text-primary/70 font-mono">GENETIC FUSION CHAMBER</p>
+        <p className="text-primary/70 font-mono">BUỒNG HỢP NHẤT ADN</p>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 items-center bg-card/40 p-8 hologram-border">
-        {/* Parent A */}
+        {/* Loài A */}
         <div className="space-y-4">
-          <label className="text-sm font-mono text-primary/80 tracking-widest block text-center">SUBJECT ALPHA</label>
+          <label className="text-sm font-mono text-primary/80 tracking-widest block text-center">LOÀI A</label>
           <Select value={parentA} onValueChange={setParentA}>
             <SelectTrigger className="bg-black/50 border-primary/30 text-foreground font-mono h-14" data-testid="select-parent-a">
-              <SelectValue placeholder="Select species..." />
+              <SelectValue placeholder="Chọn loài..." />
             </SelectTrigger>
             <SelectContent className="bg-card border-primary/30 font-mono">
               {livingCreatures.map(c => (
@@ -69,12 +69,12 @@ export default function BreedingPage() {
           </Select>
           {parentA && (
             <div className="h-32 border border-primary/20 bg-black/30 flex items-center justify-center text-primary/50 text-sm font-mono">
-              [DNA SEQUENCE SCANNED]
+              [ADN ĐÃ PHÂN TÍCH]
             </div>
           )}
         </div>
 
-        {/* Fusion Core */}
+        {/* Nhân Tổng Hợp */}
         <div className="flex flex-col items-center justify-center space-y-6">
           <div className="w-[1px] h-12 bg-primary/30 hidden md:block" />
           <Button 
@@ -84,18 +84,18 @@ export default function BreedingPage() {
             data-testid="button-breed"
           >
             <Dna className={`w-6 h-6 ${breedMutation.isPending ? 'animate-spin' : ''}`} />
-            <span className="font-mono text-xs font-bold tracking-widest">FUSE</span>
+            <span className="font-mono text-xs font-bold tracking-widest">TỔNG HỢP</span>
           </Button>
           <div className="w-[1px] h-12 bg-primary/30 hidden md:block" />
           <ArrowDown className="w-6 h-6 text-primary/50 md:hidden" />
         </div>
 
-        {/* Parent B */}
+        {/* Loài B */}
         <div className="space-y-4">
-          <label className="text-sm font-mono text-primary/80 tracking-widest block text-center">SUBJECT BETA</label>
+          <label className="text-sm font-mono text-primary/80 tracking-widest block text-center">LOÀI B</label>
           <Select value={parentB} onValueChange={setParentB}>
             <SelectTrigger className="bg-black/50 border-primary/30 text-foreground font-mono h-14" data-testid="select-parent-b">
-              <SelectValue placeholder="Select species..." />
+              <SelectValue placeholder="Chọn loài..." />
             </SelectTrigger>
             <SelectContent className="bg-card border-primary/30 font-mono">
               {livingCreatures.map(c => (
@@ -105,19 +105,18 @@ export default function BreedingPage() {
           </Select>
           {parentB && (
             <div className="h-32 border border-primary/20 bg-black/30 flex items-center justify-center text-primary/50 text-sm font-mono">
-              [DNA SEQUENCE SCANNED]
+              [ADN ĐÃ PHÂN TÍCH]
             </div>
           )}
         </div>
       </div>
 
-      {/* Result Area */}
       {result && (
         <div className="hologram-border bg-green-900/10 p-8 border-green-500/30 animate-in zoom-in-95 duration-500 text-center">
           <h2 className="text-2xl font-bold text-green-400 mb-2 font-mono">{result.message}</h2>
           <div className="text-xl text-foreground mt-6 font-bold tracking-wider">{result.newCreature.name}</div>
           <div className="text-sm text-green-400/80 font-mono mt-2">
-            ELEMENT: {result.newCreature.element} // RANK: {result.newCreature.rank} LV.{result.newCreature.rankLevel}
+            NGUYÊN TỐ: {result.newCreature.element} // CẤP: {result.newCreature.rank} BẬC {result.newCreature.rankLevel}
           </div>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">{result.newCreature.description}</p>
         </div>
@@ -125,7 +124,7 @@ export default function BreedingPage() {
       
       {!result && !breedMutation.isPending && (
         <div className="text-center font-mono text-muted-foreground flex items-center justify-center gap-2 opacity-50">
-          <AlertCircle className="w-4 h-4" /> AWAITING GENETIC INPUT
+          <AlertCircle className="w-4 h-4" /> CHỜ CHỌN LOÀI ĐỂ BẮT ĐẦU
         </div>
       )}
     </div>

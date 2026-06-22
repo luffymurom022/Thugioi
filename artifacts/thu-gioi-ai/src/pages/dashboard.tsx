@@ -4,6 +4,27 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Activity, Skull, Globe2, Sparkles, AlertTriangle, Crown, Swords, Star, Shield } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const EVENT_LABEL: Record<string, string> = {
+  war_declared:        "chiến tranh",
+  war_won:             "chiến thắng",
+  kingdom_founded:     "lập quốc",
+  kingdom_collapsed:   "sụp đổ",
+  hero_born:           "anh hùng",
+  hero_fallen:         "hi sinh",
+  rebellion:           "nổi loạn",
+  territory_expansion: "mở rộng",
+  diplomacy:           "ngoại giao",
+  migration:           "di cư",
+  evolution:           "tiến hóa",
+  extinction:          "tuyệt chủng",
+  birth:               "ra đời",
+  new_species:         "loài mới",
+  battle:              "chiến đấu",
+  disaster:            "thảm họa",
+  conquest:            "chinh phục",
+  info:                "ghi chú",
+};
+
 const EVENT_ICON: Record<string, string> = {
   war_declared:     "⚔️",
   war_won:          "🏆",
@@ -55,14 +76,14 @@ export default function Dashboard() {
           <h1 className="text-4xl font-bold tracking-widest text-foreground uppercase">Hệ Thống Phân Tích</h1>
           <p className="text-primary/70 font-mono mt-2 flex items-center gap-2">
             <Activity className="w-4 h-4 animate-pulse" />
-            WORLD DAY: <span className="text-xl font-bold text-primary">{data.worldDay}</span>
+            NĂM THẾ GIỚI: <span className="text-xl font-bold text-primary">{data.worldDay}</span>
           </p>
         </div>
         <div className="text-right">
-          <div className="text-xs text-muted-foreground font-mono">SIMULATION STATUS</div>
+          <div className="text-xs text-muted-foreground font-mono">TRẠNG THÁI HỆ THỐNG</div>
           <div className="text-green-400 font-mono tracking-widest flex items-center gap-2 justify-end">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-ping" />
-            ACTIVE
+            ĐANG CHẠY
           </div>
         </div>
       </header>
@@ -96,7 +117,7 @@ export default function Dashboard() {
       {/* War stats row */}
       <section>
         <div className="text-[10px] font-mono text-red-400/50 tracking-widest mb-3 border-b border-red-400/10 pb-1">
-          CHIẾN TRANH — V6 WAR SYSTEM
+          CHIẾN TRANH & CHINH PHỤC
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatCard
@@ -171,7 +192,9 @@ export default function Dashboard() {
                   <div className="text-xs font-mono text-primary/70 mb-1 flex items-center gap-1">
                     <span>{icon}</span>
                     <span>NGÀY {event.worldDay}</span>
-                    <span className={`px-1 rounded text-[9px] ${isWar ? "bg-red-900/40 text-red-400" : "bg-primary/10"}`}>{event.eventType}</span>
+                    <span className={`px-1 rounded text-[9px] ${isWar ? "bg-red-900/40 text-red-400" : "bg-primary/10"}`}>
+                      {EVENT_LABEL[event.eventType] ?? event.eventType}
+                    </span>
                   </div>
                   <div className="text-sm text-foreground/90">{event.description}</div>
                 </div>

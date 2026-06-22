@@ -3,9 +3,15 @@ import { runKingdomTick } from "./kingdom-engine";
 import { eq, sql } from "drizzle-orm";
 
 const RANKS = [
-  "Động Vật", "Dã Thú", "Hoang Thú", "Linh Thú", "Hoàng Thú",
-  "Vương Thú", "Tôn Thú", "Đế Thú", "Thánh Thú", "Thần Thú",
-  "Tiên Thú", "Tổ Thú", "Sáng Thần Thú",
+  "Dã Thú",    // 1 - thú hoang dã bình thường
+  "Linh Thú",  // 2 - thú có linh khí
+  "Vương Thú", // 3 - thú cấp vương
+  "Hoàng Thú", // 4 - thú cấp hoàng đế
+  "Đế Thú",    // 5 - thú cấp đế
+  "Thánh Thú", // 6 - thú cấp thánh
+  "Thần Thú",  // 7 - thú cấp thần
+  "Tiên Thú",  // 8 - thú cấp tiên
+  "Tổ Thú",    // 9 - thú tổ thần bí
 ];
 
 const WORLD_EVENTS = [
