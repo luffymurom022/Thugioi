@@ -136,8 +136,10 @@ const nodeTypes: NodeTypes = { species: SpeciesNode };
 
 // ─── Page ────────────────────────────────────────────────────
 export default function EvolutionTreePage() {
-  const { data: paths = [], isLoading: pathsLoading } = useListEvolutionPaths();
-  const { data: creatures = [], isLoading: creaturesLoading } = useListCreatures({ status: undefined, zone: undefined, element: undefined });
+  const { data: pathsRaw, isLoading: pathsLoading } = useListEvolutionPaths();
+  const { data: creaturesRaw, isLoading: creaturesLoading } = useListCreatures({ status: undefined, zone: undefined, element: undefined });
+  const paths = Array.isArray(pathsRaw) ? pathsRaw : [];
+  const creatures = Array.isArray(creaturesRaw) ? creaturesRaw : [];
 
   const creatureMap = useMemo(() => {
     const m = new Map<string, typeof creatures[0]>();

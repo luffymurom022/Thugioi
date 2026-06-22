@@ -3,7 +3,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Clock } from "lucide-react";
 
 export default function HistoryPage() {
-  const { data: history, isLoading } = useListHistory({ limit: 100 });
+  const { data: historyRaw, isLoading } = useListHistory({ limit: 100 });
+  const history = Array.isArray(historyRaw) ? historyRaw : [];
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">
@@ -29,7 +30,7 @@ export default function HistoryPage() {
           </div>
         ) : (
           <div className="space-y-6 relative">
-            {history?.map((entry) => {
+            {history.map((entry) => {
               const isExtinction = entry.eventType === 'extinction';
               const isBirth = entry.eventType === 'birth' || entry.eventType === 'new_species';
               
@@ -59,7 +60,7 @@ export default function HistoryPage() {
               );
             })}
             
-            {history?.length === 0 && (
+            {history.length === 0 && (
               <div className="ml-12 md:ml-[140px] py-10 font-mono text-muted-foreground border border-dashed border-primary/20 bg-black/20 p-6 text-center">
                 ARCHIVE EMPTY. NO EVENTS RECORDED IN CURRENT TIMELINE.
               </div>

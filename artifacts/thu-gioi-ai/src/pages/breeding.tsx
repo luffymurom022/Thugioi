@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BreedingPage() {
-  const { data: creatures, isLoading } = useListCreatures();
+  const { data: creaturesRaw, isLoading } = useListCreatures();
   const breedMutation = useBreedCreatures();
   const { toast } = useToast();
 
@@ -42,7 +42,8 @@ export default function BreedingPage() {
 
   if (isLoading) return <div className="p-8"><Skeleton className="h-[400px] bg-primary/10 hologram-border" /></div>;
 
-  const livingCreatures = creatures?.filter(c => c.status === 'alive') || [];
+  const allCreatures = Array.isArray(creaturesRaw) ? creaturesRaw : [];
+  const livingCreatures = allCreatures.filter(c => c.status === 'alive');
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">

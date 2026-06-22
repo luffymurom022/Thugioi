@@ -51,10 +51,15 @@ type Tab = "kingdoms" | "territories" | "packs" | "diplomacy";
 
 export default function KingdomsPage() {
   const [tab, setTab] = useState<Tab>("kingdoms");
-  const { data: kingdoms = [], isLoading: kingLoading } = useListKingdoms();
-  const { data: territories = [], isLoading: terrLoading } = useListTerritories();
-  const { data: packs = [], isLoading: packsLoading } = useListPacks();
-  const { data: relations = [] } = useListKingdomRelations();
+  const { data: kingdomsRaw, isLoading: kingLoading } = useListKingdoms();
+  const { data: territoriesRaw, isLoading: terrLoading } = useListTerritories();
+  const { data: packsRaw, isLoading: packsLoading } = useListPacks();
+  const { data: relationsRaw } = useListKingdomRelations();
+
+  const kingdoms = Array.isArray(kingdomsRaw) ? kingdomsRaw : [];
+  const territories = Array.isArray(territoriesRaw) ? territoriesRaw : [];
+  const packs = Array.isArray(packsRaw) ? packsRaw : [];
+  const relations = Array.isArray(relationsRaw) ? relationsRaw : [];
 
   const activeKingdoms = kingdoms.filter(k => k.status === "active");
   const maxInfluence = Math.max(...activeKingdoms.map(k => k.influence), 1);

@@ -104,9 +104,10 @@ function DNAPanel({ title, name, element, dna, color }: {
 // ─── Main Page ────────────────────────────────────────────────
 export default function GeneticsLabPage() {
   const queryClient = useQueryClient();
-  const { data: allCreatures = [], isLoading } = useListCreatures({
+  const { data: allCreaturesRaw, isLoading } = useListCreatures({
     status: "alive", zone: undefined, element: undefined,
   });
+  const allCreatures = Array.isArray(allCreaturesRaw) ? allCreaturesRaw : [];
 
   const [selectedA, setSelectedA] = useState<number | null>(null);
   const [selectedB, setSelectedB] = useState<number | null>(null);

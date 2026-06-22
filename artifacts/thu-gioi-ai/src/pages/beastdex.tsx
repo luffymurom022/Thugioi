@@ -7,12 +7,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BeastdexPage() {
   const [search, setSearch] = useState("");
-  const { data: creatures, isLoading } = useListCreatures();
+  const { data: creaturesRaw, isLoading } = useListCreatures();
 
-  const filtered = creatures?.filter(c => 
+  const creatures = Array.isArray(creaturesRaw) ? creaturesRaw : [];
+  const filtered = creatures.filter(c =>
     c.name.toLowerCase().includes(search.toLowerCase()) ||
     c.element.toLowerCase().includes(search.toLowerCase())
-  ) || [];
+  );
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
