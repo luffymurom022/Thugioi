@@ -1,0 +1,192 @@
+Nâng cấp dự án THÚ GIỚI AI hiện tại thành V8 - HỖN NGUYÊN VŨ TRỤ CORE.
+
+Mục tiêu:
+
+Biến Thú Giới thành một trong nhiều thế giới tồn tại trong cùng một vũ trụ AI.
+
+Không còn chỉ mô phỏng một thế giới.
+
+Mô phỏng nhiều thế giới cùng lúc.
+
+=================================
+UNIVERSE SYSTEM
+===============
+
+Tạo cấu trúc:
+
+Hỗn Nguyên
+
+└── Thái Cực
+
+```
+└── Cửu Giới
+
+    ├── Thú Giới
+    ├── Nhân Giới
+    ├── Ma Giới
+    ├── Tiên Giới
+    ├── Thần Giới
+    ├── Long Giới
+    ├── Linh Giới
+    ├── Minh Giới
+    └── Thiên Giới
+```
+
+=================================
+MULTI WORLD ENGINE
+==================
+
+Mỗi giới có:
+
+* Bản đồ riêng
+* Sinh vật riêng
+* Tiến hóa riêng
+* Quốc gia riêng
+* Lịch sử riêng
+
+Tất cả hoạt động đồng thời.
+
+=================================
+WORLD TEMPLATE SYSTEM
+=====================
+
+Mỗi giới có template riêng.
+
+Ví dụ:
+
+Thú Giới:
+
+* Thú tộc
+
+Nhân Giới:
+
+* Loài người
+
+Ma Giới:
+
+* Ma tộc
+
+Tiên Giới:
+
+* Tiên thú
+* Tiên nhân
+
+=================================
+PORTAL SYSTEM
+=============
+
+Cho phép mở cổng thế giới.
+
+Ví dụ:
+
+Thú Giới
+→
+Ma Giới
+
+Ma thú có thể xâm lược.
+
+=================================
+INTERWORLD WAR
+==============
+
+Chiến tranh liên giới.
+
+Ví dụ:
+
+Ma Giới xâm lược Thú Giới.
+
+Thiên Giới liên minh Thần Giới.
+
+=================================
+INTERWORLD TRADE
+================
+
+Giao thương liên giới.
+
+Trao đổi:
+
+* Tài nguyên
+* Huyết mạch
+* Sinh vật
+
+=================================
+UNIVERSE TIMELINE
+=================
+
+Timeline toàn vũ trụ.
+
+Ghi lại:
+
+* Chiến tranh liên giới
+* Tuyệt chủng
+* Sáng tạo thế giới
+* Sụp đổ thế giới
+
+=================================
+UNIVERSE MAP
+============
+
+Tạo giao diện:
+
+Bản đồ vũ trụ.
+
+Hiển thị:
+
+* Các giới
+* Cổng không gian
+* Quan hệ giữa các giới
+
+=================================
+UNIVERSE EVENTS
+===============
+
+Sự kiện quy mô vũ trụ:
+
+* Hỗn Độn Bạo Động
+* Đại Diệt Thế
+* Kỷ Nguyên Sáng Thế
+* Kỷ Nguyên Thần Thú
+
+=================================
+UNIVERSE AI
+===========
+
+AI không còn điều khiển riêng từng giới.
+
+AI điều khiển toàn bộ vũ trụ.
+
+Tự cân bằng:
+
+* Dân số
+* Chiến tranh
+* Tài nguyên
+* Tiến hóa
+
+=================================
+UNIVERSE DASHBOARD
+==================
+
+Hiển thị:
+
+* Tổng số giới
+* Tổng số loài
+* Tổng số quốc gia
+* Tổng số sinh vật
+* Giới mạnh nhất
+* Đế quốc mạnh nhất
+* Thần thú mạnh nhất
+
+=================================
+YÊU CẦU
+=======
+
+Thiết kế để hỗ trợ:
+
+* Hàng chục thế giới
+* Hàng nghìn quốc gia
+* Hàng triệu loài
+* Hàng tỷ cá thể
+
+Mọi thế giới phải tự vận hành bằng Universe Engine.
+
+Không cần người chơi điều khiển.

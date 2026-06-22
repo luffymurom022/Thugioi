@@ -1,11 +1,12 @@
-import { pgTable, text, serial, integer, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, timestamp, boolean, uniqueIndex } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
 // Territories — resource layer on top of zones
 export const territoriesTable = pgTable("territories", {
   id: serial("id").primaryKey(),
-  zoneName: text("zone_name").notNull().unique(),
+  worldId: integer("world_id").notNull().default(1),
+  zoneName: text("zone_name").notNull(),
   food: integer("food").notNull().default(600),
   water: integer("water").notNull().default(600),
   mineral: integer("mineral").notNull().default(300),
@@ -19,12 +20,15 @@ export const territoriesTable = pgTable("territories", {
   controllingKingdom: text("controlling_kingdom"),
   contested: boolean("contested").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-});
+}, (table) => [
+  uniqueIndex("territories_world_zone_idx").on(table.worldId, table.zoneName),
+]);
 
 // Beast Kingdoms
 export const beastKingdomsTable = pgTable("beast_kingdoms", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull().unique(),
+  worldId: integer("world_id").notNull().default(1),
+  name: text("name").notNull(),
   dominantSpecies: text("dominant_species").notNull(),
   foundedDay: integer("founded_day").notNull().default(1),
   capital: text("capital").notNull(),
@@ -40,11 +44,14 @@ export const beastKingdomsTable = pgTable("beast_kingdoms", {
   warCount: integer("war_count").notNull().default(0),
   warWins: integer("war_wins").notNull().default(0),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-});
+}, (table) => [
+  uniqueIndex("beast_kingdoms_world_name_idx").on(table.worldId, table.name),
+]);
 
 // Packs — tribe groups per species per territory
 export const packsTable = pgTable("packs", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   speciesName: text("species_name").notNull(),
   territory: text("territory").notNull(),
   population: integer("population").notNull().default(0),
@@ -60,6 +67,7 @@ export const packsTable = pgTable("packs", {
 // Kingdom Relations — diplomacy
 export const kingdomRelationsTable = pgTable("kingdom_relations", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   kingdomNameA: text("kingdom_name_a").notNull(),
   kingdomNameB: text("kingdom_name_b").notNull(),
   relation: text("relation").notNull().default("neutral"),
@@ -70,9 +78,10 @@ export const kingdomRelationsTable = pgTable("kingdom_relations", {
 // Wars — V6 War & Conquest System
 export const warsTable = pgTable("wars", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   attackerKingdom: text("attacker_kingdom").notNull(),
   defenderKingdom: text("defender_kingdom").notNull(),
-  status: text("status").notNull().default("ongoing"), // ongoing | attacker_won | defender_won | ceasefire
+  status: text("status").notNull().default("ongoing"),
   startDay: integer("start_day").notNull(),
   endDay: integer("end_day"),
   territoryWon: text("territory_won"),
@@ -85,13 +94,14 @@ export const warsTable = pgTable("wars", {
 // Heroes — V6 Hero System
 export const heroesTable = pgTable("heroes", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   name: text("name").notNull(),
   kingdomName: text("kingdom_name").notNull(),
   level: integer("level").notNull().default(1),
   ability: text("ability").notNull().default(""),
   militaryBonus: integer("military_bonus").notNull().default(10),
   moraleBonus: integer("morale_bonus").notNull().default(5),
-  status: text("status").notNull().default("active"), // active | fallen
+  status: text("status").notNull().default("active"),
   bornDay: integer("born_day").notNull().default(1),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });

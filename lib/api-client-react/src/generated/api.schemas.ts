@@ -349,6 +349,79 @@ export interface LoreNews {
   createdAt: string;
 }
 
+export interface World {
+  id: number;
+  name: string;
+  displayName: string;
+  type: string;
+  description?: string;
+  status: string;
+  powerLevel: number;
+  totalCreatures: number;
+  totalKingdoms: number;
+  totalSpecies: number;
+  worldDay: number;
+  dangerLevel: number;
+  spiritualEnergy: number;
+  colorHex: string;
+}
+
+export interface UniversePortal {
+  id: number;
+  worldAId: number;
+  worldBId: number;
+  status: string;
+  /** @nullable */
+  openedDay?: number | null;
+  /** @nullable */
+  closedDay?: number | null;
+  portalStrength: number;
+}
+
+export interface UniverseEvent {
+  id: number;
+  universeDay: number;
+  eventType: string;
+  title: string;
+  description: string;
+  affectedWorlds: string;
+  severity: string;
+}
+
+export interface InterworldWar {
+  id: number;
+  attackerWorldId: number;
+  defenderWorldId: number;
+  attackerKingdom: string;
+  defenderKingdom: string;
+  status: string;
+  startDay: number;
+  /** @nullable */
+  endDay?: number | null;
+  /** @nullable */
+  portalId?: number | null;
+  description?: string;
+}
+
+export type UniverseSummaryDataSummary = {
+  totalWorlds: number;
+  totalCreatures: number;
+  totalKingdoms: number;
+  totalSpecies: number;
+  openPortals: number;
+  activeWars: number;
+  strongestWorldName: string;
+  strongestWorldPower: number;
+};
+
+export interface UniverseSummaryData {
+  worlds: World[];
+  portals: UniversePortal[];
+  events: UniverseEvent[];
+  wars: InterworldWar[];
+  summary: UniverseSummaryDataSummary;
+}
+
 export interface LoreSummary {
   currentAge: string;
   currentAgeDescription: string;
@@ -382,5 +455,9 @@ offset?: number;
 export type GenerateLore200 = {
   success: boolean;
   worldDay: number;
+};
+
+export type PostUniverseTick200 = {
+  success: boolean;
 };
 

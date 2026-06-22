@@ -4,6 +4,7 @@ import { z } from "zod/v4";
 
 export const historyTable = pgTable("world_history", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   worldDay: integer("world_day").notNull().default(1),
   eventType: text("event_type").notNull().default("info"),
   description: text("description").notNull(),
@@ -12,12 +13,14 @@ export const historyTable = pgTable("world_history", {
 
 export const worldStateTable = pgTable("world_state", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   worldDay: integer("world_day").notNull().default(1),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const worldEventsTable = pgTable("world_events", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   worldDay: integer("world_day").notNull().default(1),
   eventName: text("event_name").notNull(),
   targetZone: text("target_zone").notNull().default("all"),
@@ -30,6 +33,7 @@ export const worldEventsTable = pgTable("world_events", {
 
 export const evolutionPathsTable = pgTable("evolution_paths", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   fromSpecies: text("from_species").notNull(),
   toSpecies: text("to_species").notNull(),
   toRank: text("to_rank").notNull(),

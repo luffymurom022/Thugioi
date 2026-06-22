@@ -33,6 +33,7 @@ import type {
   HealthStatus,
   Hero,
   HistoryEntry,
+  InterworldWar,
   KingdomRelation,
   Legend,
   ListCreaturesParams,
@@ -42,9 +43,14 @@ import type {
   LoreSummary,
   Myth,
   Pack,
+  PostUniverseTick200,
   Territory,
   TickResult,
+  UniverseEvent,
+  UniversePortal,
+  UniverseSummaryData,
   War,
+  World,
   WorldAge,
   Zone,
   ZoneDetail
@@ -2127,5 +2133,460 @@ export const useGenerateLore = <TError = ErrorType<unknown>,
         TContext
       > => {
       return useMutation(getGenerateLoreMutationOptions(options));
+    }
+
+export const getGetUniverseSummaryUrl = () => {
+
+
+
+
+  return `/api/universe/summary`
+}
+
+/**
+ * @summary Get full universe summary with all worlds, portals, events, wars
+ */
+export const getUniverseSummary = async ( options?: RequestInit): Promise<UniverseSummaryData> => {
+
+  return customFetch<UniverseSummaryData>(getGetUniverseSummaryUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetUniverseSummaryQueryKey = () => {
+    return [
+    `/api/universe/summary`
+    ] as const;
+    }
+
+
+export const getGetUniverseSummaryQueryOptions = <TData = Awaited<ReturnType<typeof getUniverseSummary>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseSummary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetUniverseSummaryQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getUniverseSummary>>> = ({ signal }) => getUniverseSummary({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getUniverseSummary>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetUniverseSummaryQueryResult = NonNullable<Awaited<ReturnType<typeof getUniverseSummary>>>
+export type GetUniverseSummaryQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get full universe summary with all worlds, portals, events, wars
+ */
+
+export function useGetUniverseSummary<TData = Awaited<ReturnType<typeof getUniverseSummary>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseSummary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetUniverseSummaryQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetUniverseWorldsUrl = () => {
+
+
+
+
+  return `/api/universe/worlds`
+}
+
+/**
+ * @summary List all worlds
+ */
+export const getUniverseWorlds = async ( options?: RequestInit): Promise<World[]> => {
+
+  return customFetch<World[]>(getGetUniverseWorldsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetUniverseWorldsQueryKey = () => {
+    return [
+    `/api/universe/worlds`
+    ] as const;
+    }
+
+
+export const getGetUniverseWorldsQueryOptions = <TData = Awaited<ReturnType<typeof getUniverseWorlds>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseWorlds>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetUniverseWorldsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getUniverseWorlds>>> = ({ signal }) => getUniverseWorlds({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getUniverseWorlds>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetUniverseWorldsQueryResult = NonNullable<Awaited<ReturnType<typeof getUniverseWorlds>>>
+export type GetUniverseWorldsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all worlds
+ */
+
+export function useGetUniverseWorlds<TData = Awaited<ReturnType<typeof getUniverseWorlds>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseWorlds>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetUniverseWorldsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetUniversePortalsUrl = () => {
+
+
+
+
+  return `/api/universe/portals`
+}
+
+/**
+ * @summary List universe portals
+ */
+export const getUniversePortals = async ( options?: RequestInit): Promise<UniversePortal[]> => {
+
+  return customFetch<UniversePortal[]>(getGetUniversePortalsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetUniversePortalsQueryKey = () => {
+    return [
+    `/api/universe/portals`
+    ] as const;
+    }
+
+
+export const getGetUniversePortalsQueryOptions = <TData = Awaited<ReturnType<typeof getUniversePortals>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniversePortals>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetUniversePortalsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getUniversePortals>>> = ({ signal }) => getUniversePortals({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getUniversePortals>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetUniversePortalsQueryResult = NonNullable<Awaited<ReturnType<typeof getUniversePortals>>>
+export type GetUniversePortalsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List universe portals
+ */
+
+export function useGetUniversePortals<TData = Awaited<ReturnType<typeof getUniversePortals>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniversePortals>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetUniversePortalsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetUniverseEventsUrl = () => {
+
+
+
+
+  return `/api/universe/events`
+}
+
+/**
+ * @summary List universe events
+ */
+export const getUniverseEvents = async ( options?: RequestInit): Promise<UniverseEvent[]> => {
+
+  return customFetch<UniverseEvent[]>(getGetUniverseEventsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetUniverseEventsQueryKey = () => {
+    return [
+    `/api/universe/events`
+    ] as const;
+    }
+
+
+export const getGetUniverseEventsQueryOptions = <TData = Awaited<ReturnType<typeof getUniverseEvents>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseEvents>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetUniverseEventsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getUniverseEvents>>> = ({ signal }) => getUniverseEvents({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getUniverseEvents>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetUniverseEventsQueryResult = NonNullable<Awaited<ReturnType<typeof getUniverseEvents>>>
+export type GetUniverseEventsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List universe events
+ */
+
+export function useGetUniverseEvents<TData = Awaited<ReturnType<typeof getUniverseEvents>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseEvents>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetUniverseEventsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetUniverseWarsUrl = () => {
+
+
+
+
+  return `/api/universe/wars`
+}
+
+/**
+ * @summary List interworld wars
+ */
+export const getUniverseWars = async ( options?: RequestInit): Promise<InterworldWar[]> => {
+
+  return customFetch<InterworldWar[]>(getGetUniverseWarsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetUniverseWarsQueryKey = () => {
+    return [
+    `/api/universe/wars`
+    ] as const;
+    }
+
+
+export const getGetUniverseWarsQueryOptions = <TData = Awaited<ReturnType<typeof getUniverseWars>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseWars>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetUniverseWarsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getUniverseWars>>> = ({ signal }) => getUniverseWars({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getUniverseWars>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetUniverseWarsQueryResult = NonNullable<Awaited<ReturnType<typeof getUniverseWars>>>
+export type GetUniverseWarsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List interworld wars
+ */
+
+export function useGetUniverseWars<TData = Awaited<ReturnType<typeof getUniverseWars>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getUniverseWars>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetUniverseWarsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getPostUniverseTickUrl = () => {
+
+
+
+
+  return `/api/universe/tick`
+}
+
+/**
+ * @summary Run a universe simulation tick
+ */
+export const postUniverseTick = async ( options?: RequestInit): Promise<PostUniverseTick200> => {
+
+  return customFetch<PostUniverseTick200>(getPostUniverseTickUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+export const getPostUniverseTickMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postUniverseTick>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof postUniverseTick>>, TError,void, TContext> => {
+
+const mutationKey = ['postUniverseTick'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postUniverseTick>>, void> = () => {
+
+
+          return  postUniverseTick(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostUniverseTickMutationResult = NonNullable<Awaited<ReturnType<typeof postUniverseTick>>>
+
+    export type PostUniverseTickMutationError = ErrorType<unknown>
+
+    /**
+ * @summary Run a universe simulation tick
+ */
+export const usePostUniverseTick = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postUniverseTick>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof postUniverseTick>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getPostUniverseTickMutationOptions(options));
     }
 

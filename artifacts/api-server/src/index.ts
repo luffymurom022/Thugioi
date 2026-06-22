@@ -1,6 +1,6 @@
 import app from "./app";
 import { logger } from "./lib/logger";
-import { autoSeedIfEmpty } from "./lib/seed";
+import { autoSeedIfEmpty, seedUniverseIfEmpty } from "./lib/seed";
 
 const rawPort = process.env["PORT"];
 
@@ -26,5 +26,8 @@ app.listen(port, (err) => {
 
   autoSeedIfEmpty().catch((err) => {
     logger.error({ err }, "Auto-seed failed");
+  });
+  seedUniverseIfEmpty().catch((err) => {
+    logger.error({ err }, "Universe seed failed");
   });
 });

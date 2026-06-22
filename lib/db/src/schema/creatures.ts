@@ -4,6 +4,7 @@ import { z } from "zod/v4";
 
 export const creaturesTable = pgTable("creatures", {
   id: serial("id").primaryKey(),
+  worldId: integer("world_id").notNull().default(1),
   name: text("name").notNull(),
   rank: text("rank").notNull(),
   rankLevel: integer("rank_level").notNull().default(1),

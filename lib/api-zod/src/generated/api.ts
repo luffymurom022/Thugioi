@@ -671,3 +671,144 @@ export const GenerateLoreResponse = zod.object({
 })
 
 
+/**
+ * @summary Get full universe summary with all worlds, portals, events, wars
+ */
+export const GetUniverseSummaryResponse = zod.object({
+  "worlds": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "displayName": zod.string(),
+  "type": zod.string(),
+  "description": zod.string().optional(),
+  "status": zod.string(),
+  "powerLevel": zod.number(),
+  "totalCreatures": zod.number(),
+  "totalKingdoms": zod.number(),
+  "totalSpecies": zod.number(),
+  "worldDay": zod.number(),
+  "dangerLevel": zod.number(),
+  "spiritualEnergy": zod.number(),
+  "colorHex": zod.string()
+})),
+  "portals": zod.array(zod.object({
+  "id": zod.number(),
+  "worldAId": zod.number(),
+  "worldBId": zod.number(),
+  "status": zod.string(),
+  "openedDay": zod.number().nullish(),
+  "closedDay": zod.number().nullish(),
+  "portalStrength": zod.number()
+})),
+  "events": zod.array(zod.object({
+  "id": zod.number(),
+  "universeDay": zod.number(),
+  "eventType": zod.string(),
+  "title": zod.string(),
+  "description": zod.string(),
+  "affectedWorlds": zod.string(),
+  "severity": zod.string()
+})),
+  "wars": zod.array(zod.object({
+  "id": zod.number(),
+  "attackerWorldId": zod.number(),
+  "defenderWorldId": zod.number(),
+  "attackerKingdom": zod.string(),
+  "defenderKingdom": zod.string(),
+  "status": zod.string(),
+  "startDay": zod.number(),
+  "endDay": zod.number().nullish(),
+  "portalId": zod.number().nullish(),
+  "description": zod.string().optional()
+})),
+  "summary": zod.object({
+  "totalWorlds": zod.number(),
+  "totalCreatures": zod.number(),
+  "totalKingdoms": zod.number(),
+  "totalSpecies": zod.number(),
+  "openPortals": zod.number(),
+  "activeWars": zod.number(),
+  "strongestWorldName": zod.string(),
+  "strongestWorldPower": zod.number()
+})
+})
+
+
+/**
+ * @summary List all worlds
+ */
+export const GetUniverseWorldsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "displayName": zod.string(),
+  "type": zod.string(),
+  "description": zod.string().optional(),
+  "status": zod.string(),
+  "powerLevel": zod.number(),
+  "totalCreatures": zod.number(),
+  "totalKingdoms": zod.number(),
+  "totalSpecies": zod.number(),
+  "worldDay": zod.number(),
+  "dangerLevel": zod.number(),
+  "spiritualEnergy": zod.number(),
+  "colorHex": zod.string()
+})
+export const GetUniverseWorldsResponse = zod.array(GetUniverseWorldsResponseItem)
+
+
+/**
+ * @summary List universe portals
+ */
+export const GetUniversePortalsResponseItem = zod.object({
+  "id": zod.number(),
+  "worldAId": zod.number(),
+  "worldBId": zod.number(),
+  "status": zod.string(),
+  "openedDay": zod.number().nullish(),
+  "closedDay": zod.number().nullish(),
+  "portalStrength": zod.number()
+})
+export const GetUniversePortalsResponse = zod.array(GetUniversePortalsResponseItem)
+
+
+/**
+ * @summary List universe events
+ */
+export const GetUniverseEventsResponseItem = zod.object({
+  "id": zod.number(),
+  "universeDay": zod.number(),
+  "eventType": zod.string(),
+  "title": zod.string(),
+  "description": zod.string(),
+  "affectedWorlds": zod.string(),
+  "severity": zod.string()
+})
+export const GetUniverseEventsResponse = zod.array(GetUniverseEventsResponseItem)
+
+
+/**
+ * @summary List interworld wars
+ */
+export const GetUniverseWarsResponseItem = zod.object({
+  "id": zod.number(),
+  "attackerWorldId": zod.number(),
+  "defenderWorldId": zod.number(),
+  "attackerKingdom": zod.string(),
+  "defenderKingdom": zod.string(),
+  "status": zod.string(),
+  "startDay": zod.number(),
+  "endDay": zod.number().nullish(),
+  "portalId": zod.number().nullish(),
+  "description": zod.string().optional()
+})
+export const GetUniverseWarsResponse = zod.array(GetUniverseWarsResponseItem)
+
+
+/**
+ * @summary Run a universe simulation tick
+ */
+export const PostUniverseTickResponse = zod.object({
+  "success": zod.boolean()
+})
+
+

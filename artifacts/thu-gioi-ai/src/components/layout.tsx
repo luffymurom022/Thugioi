@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Map as MapIcon, Book, Dna, History, GitBranch, FlaskConical, Crown, ScrollText } from "lucide-react";
+import { LayoutDashboard, Map as MapIcon, Book, Dna, History, GitBranch, FlaskConical, Crown, ScrollText, Globe } from "lucide-react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -14,6 +14,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { href: "/genetics",  label: "Genetics Lab",    icon: FlaskConical },
     { href: "/kingdoms",  label: "Vương Quốc",     icon: Crown },
     { href: "/loredex",   label: "Loredex",         icon: ScrollText },
+    { href: "/universe",  label: "Hỗn Nguyên",      icon: Globe },
   ];
 
   return (
@@ -26,7 +27,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Dna className="w-6 h-6 animate-pulse-glow" />
             THÚ GIỚI AI
           </h1>
-          <div className="text-xs text-primary/50 font-mono mt-1">SYS.VER.0.7.0</div>
+          <div className="text-xs text-primary/50 font-mono mt-1">SYS.VER.0.8.0</div>
         </div>
 
         <nav className="flex-1 p-4 space-y-1 relative overflow-y-auto">

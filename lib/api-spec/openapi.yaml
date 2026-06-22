@@ -20,6 +20,7 @@ tags:
   - name: wars
   - name: heroes
   - name: lore
+  - name: universe
 paths:
   /healthz:
     get:
@@ -473,6 +474,96 @@ paths:
                     type: boolean
                   worldDay:
                     type: integer
+
+  /universe/summary:
+    get:
+      operationId: getUniverseSummary
+      tags: [universe]
+      summary: Get full universe summary with all worlds, portals, events, wars
+      responses:
+        "200":
+          description: Universe summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UniverseSummaryData"
+
+  /universe/worlds:
+    get:
+      operationId: getUniverseWorlds
+      tags: [universe]
+      summary: List all worlds
+      responses:
+        "200":
+          description: List of worlds
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/World"
+
+  /universe/portals:
+    get:
+      operationId: getUniversePortals
+      tags: [universe]
+      summary: List universe portals
+      responses:
+        "200":
+          description: Portals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UniversePortal"
+
+  /universe/events:
+    get:
+      operationId: getUniverseEvents
+      tags: [universe]
+      summary: List universe events
+      responses:
+        "200":
+          description: Events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UniverseEvent"
+
+  /universe/wars:
+    get:
+      operationId: getUniverseWars
+      tags: [universe]
+      summary: List interworld wars
+      responses:
+        "200":
+          description: Wars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InterworldWar"
+
+  /universe/tick:
+    post:
+      operationId: postUniverseTick
+      tags: [universe]
+      summary: Run a universe simulation tick
+      responses:
+        "200":
+          description: Tick result
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success]
+                properties:
+                  success:
+                    type: boolean
 
 components:
   schemas:
@@ -1111,6 +1202,143 @@ components:
           type: integer
         createdAt:
           type: string
+
+    World:
+      type: object
+      required: [id, name, displayName, type, status, powerLevel, totalCreatures, totalKingdoms, totalSpecies, worldDay, dangerLevel, spiritualEnergy, colorHex]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        displayName:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        powerLevel:
+          type: integer
+        totalCreatures:
+          type: integer
+        totalKingdoms:
+          type: integer
+        totalSpecies:
+          type: integer
+        worldDay:
+          type: integer
+        dangerLevel:
+          type: integer
+        spiritualEnergy:
+          type: integer
+        colorHex:
+          type: string
+
+    UniversePortal:
+      type: object
+      required: [id, worldAId, worldBId, status, portalStrength]
+      properties:
+        id:
+          type: integer
+        worldAId:
+          type: integer
+        worldBId:
+          type: integer
+        status:
+          type: string
+        openedDay:
+          type: ["integer", "null"]
+        closedDay:
+          type: ["integer", "null"]
+        portalStrength:
+          type: integer
+
+    UniverseEvent:
+      type: object
+      required: [id, universeDay, eventType, title, description, affectedWorlds, severity]
+      properties:
+        id:
+          type: integer
+        universeDay:
+          type: integer
+        eventType:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        affectedWorlds:
+          type: string
+        severity:
+          type: string
+
+    InterworldWar:
+      type: object
+      required: [id, attackerWorldId, defenderWorldId, attackerKingdom, defenderKingdom, status, startDay]
+      properties:
+        id:
+          type: integer
+        attackerWorldId:
+          type: integer
+        defenderWorldId:
+          type: integer
+        attackerKingdom:
+          type: string
+        defenderKingdom:
+          type: string
+        status:
+          type: string
+        startDay:
+          type: integer
+        endDay:
+          type: ["integer", "null"]
+        portalId:
+          type: ["integer", "null"]
+        description:
+          type: string
+
+    UniverseSummaryData:
+      type: object
+      required: [worlds, portals, events, wars, summary]
+      properties:
+        worlds:
+          type: array
+          items:
+            $ref: "#/components/schemas/World"
+        portals:
+          type: array
+          items:
+            $ref: "#/components/schemas/UniversePortal"
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/UniverseEvent"
+        wars:
+          type: array
+          items:
+            $ref: "#/components/schemas/InterworldWar"
+        summary:
+          type: object
+          required: [totalWorlds, totalCreatures, totalKingdoms, totalSpecies, openPortals, activeWars, strongestWorldName, strongestWorldPower]
+          properties:
+            totalWorlds:
+              type: integer
+            totalCreatures:
+              type: integer
+            totalKingdoms:
+              type: integer
+            totalSpecies:
+              type: integer
+            openPortals:
+              type: integer
+            activeWars:
+              type: integer
+            strongestWorldName:
+              type: string
+            strongestWorldPower:
+              type: integer
 
     LoreSummary:
       type: object

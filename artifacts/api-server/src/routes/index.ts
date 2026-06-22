@@ -9,6 +9,7 @@ import evolutionRouter from "./evolution";
 import geneticsRouter from "./genetics";
 import kingdomsRouter from "./kingdoms";
 import loreRouter from "./lore";
+import universeRouter from "./universe";
 
 const router: IRouter = Router();
 
@@ -22,5 +23,6 @@ router.use(evolutionRouter);
 router.use(geneticsRouter);
 router.use(kingdomsRouter);
 router.use(loreRouter);
+router.use(universeRouter);
 
 export default router;
