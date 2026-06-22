@@ -1,0 +1,213 @@
+Nâng cấp dự án THÚ GIỚI AI hiện tại thành V6 - WAR & WORLD CONQUEST SYSTEM.
+
+Không thay đổi các hệ thống hiện có.
+
+Mục tiêu:
+
+Các quốc gia thú có thể:
+
+* Tuyên chiến
+* Xâm lược
+* Phòng thủ
+* Chiếm lãnh thổ
+* Sụp đổ
+* Trỗi dậy
+
+Mọi quyết định do World Engine thực hiện.
+
+=================================
+WAR SYSTEM
+==========
+
+Mỗi quốc gia có:
+
+{
+militaryPower,
+population,
+economy,
+territorySize,
+technologyLevel,
+morale
+}
+
+World Engine đánh giá sức mạnh định kỳ.
+
+=================================
+WAR DECLARATION
+===============
+
+Quốc gia có thể tuyên chiến khi:
+
+* Thiếu tài nguyên
+* Mở rộng lãnh thổ
+* Thù địch lâu dài
+* Chênh lệch sức mạnh lớn
+
+Ví dụ:
+
+Thiên Hỏa Lang Quốc
+
+tuyên chiến với
+
+Lôi Đình Ưng Quốc
+
+=================================
+ARMY SYSTEM
+===========
+
+Mỗi quốc gia có:
+
+* Bộ binh thú
+* Thú bay
+* Thú tinh anh
+* Thú vương
+
+Quân đội được tạo từ dân số.
+
+=================================
+BATTLE SYSTEM
+=============
+
+Tính toán:
+
+* Quân số
+* Cấp bậc
+* Huyết mạch
+* Tướng lĩnh
+* Địa hình
+* Tài nguyên
+
+Không cần chiến đấu thời gian thực.
+
+Mô phỏng bằng thuật toán.
+
+=================================
+TERRITORY CONQUEST
+==================
+
+Nếu thắng:
+
+* Chiếm lãnh thổ
+* Chiếm tài nguyên
+* Tăng ảnh hưởng
+
+Nếu thua:
+
+* Mất lãnh thổ
+* Giảm dân số
+* Giảm tinh thần
+
+=================================
+KINGDOM COLLAPSE
+================
+
+Nếu:
+
+* Mất thủ đô
+* Dân số quá thấp
+* Nội loạn
+
+Quốc gia bị diệt vong.
+
+=================================
+REBELLION SYSTEM
+================
+
+Lãnh thổ có thể nổi loạn.
+
+Tạo quốc gia mới.
+
+Ví dụ:
+
+Hỏa Sơn Vực ly khai.
+
+Thành lập:
+
+Xích Viêm Lang Quốc.
+
+=================================
+HERO SYSTEM
+===========
+
+Sinh ra nhân vật huyền thoại.
+
+Ví dụ:
+
+Cửu Dương Lang Đế
+
+Có thể:
+
+* Tăng sức mạnh quân đội
+* Thống nhất quốc gia
+* Chinh phục thế giới
+
+=================================
+WORLD EVENTS
+============
+
+Sự kiện lớn:
+
+* Đại chiến thú giới
+* Thiên tai
+* Dịch bệnh
+* Bùng nổ linh khí
+* Kỷ nguyên mới
+
+Ảnh hưởng toàn bộ bản đồ.
+
+=================================
+WORLD HISTORY
+=============
+
+Tự động ghi:
+
+[Năm 1024]
+
+Thiên Hỏa Lang Quốc tuyên chiến.
+
+[Năm 1028]
+
+Lôi Đình Ưng Quốc thất thủ.
+
+[Năm 1035]
+
+Thiên Hỏa Lang Quốc thống nhất Thú Giới.
+
+=================================
+WORLD MAP
+=========
+
+Hiển thị:
+
+* Quốc gia
+* Vùng chiến sự
+* Liên minh
+* Lãnh thổ chiếm đóng
+
+Cập nhật thời gian thực.
+
+=================================
+DASHBOARD
+=========
+
+Thêm:
+
+* Quốc gia mạnh nhất
+* Quốc gia hiếu chiến nhất
+* Số cuộc chiến đang diễn ra
+* Tổng lãnh thổ bị chiếm
+* Đế quốc lớn nhất
+
+=================================
+YÊU CẦU
+=======
+
+Thiết kế để mô phỏng:
+
+* Hàng trăm quốc gia
+* Hàng nghìn loài
+* Hàng triệu cá thể
+
+Không cần người chơi.
+
+Mọi quyết định do World Engine tự vận hành.
